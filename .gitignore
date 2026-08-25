@@ -1,0 +1,6 @@
+.DS_Store
+node_modules/
+*.log
+
+# Make Apps Editor local state
+.make/

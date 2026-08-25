@@ -1,0 +1,18 @@
+{
+	"url": "https://api.transmitmessage.com/v2/sms",
+	"method": "GET",
+	"qs": {
+		"limit": 1
+	},
+	"headers": {
+		"Authorization": "{{parameters.apiKey}}"
+	},
+	"response": {
+		"error": {
+			"message": "[{{statusCode}}] Kudosity rejected the API key. Check Settings > API in your Kudosity account."
+		}
+	},
+	"log": {
+		"sanitize": ["request.headers.authorization"]
+	}
+}

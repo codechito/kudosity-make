@@ -1,0 +1,14 @@
+{
+	"baseUrl": "https://api.transmitmessage.com/v2",
+	"headers": {
+		"Authorization": "{{connection.apiKey}}"
+	},
+	"response": {
+		"error": {
+			"message": "[{{statusCode}}] {{ifempty(body.error.message, body.message, body)}}"
+		}
+	},
+	"log": {
+		"sanitize": ["request.headers.authorization"]
+	}
+}

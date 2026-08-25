@@ -1,0 +1,18 @@
+[
+	{
+		"name": "eventType",
+		"type": "select",
+		"label": "Event Type",
+		"required": true,
+		"help": "One webhook is registered per trigger. Add a separate trigger module for each event you want to listen to.",
+		"options": [
+			{ "label": "SMS Inbound", "value": "SMS_INBOUND" },
+			{ "label": "SMS Status",  "value": "SMS_STATUS"  },
+			{ "label": "MMS Inbound", "value": "MMS_INBOUND" },
+			{ "label": "MMS Status",  "value": "MMS_STATUS"  },
+			{ "label": "RCS Status",  "value": "RCS_STATUS"  },
+			{ "label": "Opt Out",     "value": "OPT_OUT"     },
+			{ "label": "Link Hit",    "value": "LINK_HIT"    }
+		]
+	}
+]

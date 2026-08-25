@@ -1,0 +1,13 @@
+{
+	"url": "/sms",
+	"method": "POST",
+	"body": {
+		"sender": "{{parameters.sender}}",
+		"recipient": "{{parameters.recipient}}",
+		"message": "{{parameters.message}}",
+		"message_ref": "{{parameters.message_ref}}"
+	},
+	"response": {
+		"output": "{{body}}"
+	}
+}

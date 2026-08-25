@@ -1,0 +1,29 @@
+[
+	{
+		"name": "sender",
+		"type": "text",
+		"label": "Sender",
+		"required": true,
+		"help": "Sender ID or virtual number the message is sent from."
+	},
+	{
+		"name": "recipient",
+		"type": "text",
+		"label": "Recipient",
+		"required": true,
+		"help": "Destination number in E.164 format, e.g. +61412345678."
+	},
+	{
+		"name": "message",
+		"type": "text",
+		"label": "Message",
+		"required": true,
+		"multiline": true
+	},
+	{
+		"name": "message_ref",
+		"type": "text",
+		"label": "Message Reference",
+		"help": "Optional reference echoed back on status webhooks. Useful for correlating a send with its delivery receipt."
+	}
+]

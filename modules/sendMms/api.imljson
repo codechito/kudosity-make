@@ -1,0 +1,15 @@
+{
+	"url": "/mms",
+	"method": "POST",
+	"body": {
+		"sender": "{{parameters.sender}}",
+		"recipient": "{{parameters.recipient}}",
+		"subject": "{{parameters.subject}}",
+		"message": "{{parameters.message}}",
+		"media_url": "{{parameters.media_url}}",
+		"message_ref": "{{parameters.message_ref}}"
+	},
+	"response": {
+		"output": "{{body}}"
+	}
+}

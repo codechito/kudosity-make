@@ -1,0 +1,14 @@
+{
+	"url": "/webhook",
+	"method": "POST",
+	"body": {
+		"url": "{{webhook.url}}",
+		"webhook_name": "Make - {{parameters.eventType}}",
+		"event_type": "{{parameters.eventType}}"
+	},
+	"response": {
+		"data": {
+			"webhookId": "{{body.id}}"
+		}
+	}
+}

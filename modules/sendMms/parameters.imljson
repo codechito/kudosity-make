@@ -1,0 +1,8 @@
+[
+	{ "name": "sender",      "type": "text", "label": "Sender",    "required": true },
+	{ "name": "recipient",   "type": "text", "label": "Recipient", "required": true, "help": "E.164 format, e.g. +61412345678." },
+	{ "name": "media_url",   "type": "url",  "label": "Media URL", "required": true, "help": "Publicly reachable URL of the image or media to attach." },
+	{ "name": "subject",     "type": "text", "label": "Subject" },
+	{ "name": "message",     "type": "text", "label": "Message", "multiline": true },
+	{ "name": "message_ref", "type": "text", "label": "Message Reference" }
+]

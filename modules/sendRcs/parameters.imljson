@@ -1,0 +1,6 @@
+[
+	{ "name": "sender",      "type": "text", "label": "Sender",    "required": true, "help": "RCS agent registered with Kudosity." },
+	{ "name": "recipient",   "type": "text", "label": "Recipient", "required": true, "help": "E.164 format, e.g. +61412345678." },
+	{ "name": "message",     "type": "text", "label": "Message",   "required": true, "multiline": true },
+	{ "name": "message_ref", "type": "text", "label": "Message Reference" }
+]
