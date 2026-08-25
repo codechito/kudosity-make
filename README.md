@@ -9,6 +9,7 @@ Sibling integrations: [`kudosity-n8n`](https://github.com/codechito/kudosity-n8n
 
 - [Setup](#setup) — one-off, done by you in Make
 - [Usage](#usage) — how the app is used inside a scenario
+- [`docs/`](docs/) — the user-facing help text that goes into Make's Docs sections
 
 ## Status
 
@@ -125,13 +126,55 @@ Repeat for MMS (needs a publicly reachable **Media URL**), WhatsApp and RCS. Tho
 require the relevant channel to be provisioned on your Kudosity account — if a send fails
 with a sender or channel error, that is an account provisioning issue, not the app.
 
+## Add the documentation
+
+Every module and the app itself has a **Docs** section, holding the help text users see in
+the scenario editor. The text lives in [`docs/`](docs/) in this repo so it stays
+version-controlled — paste each file into its matching section:
+
+| File | Goes in |
+|---|---|
+| `docs/app.md` | App → **Docs** |
+| `docs/modules/send-sms.md` | *Send an SMS* → **Docs** |
+| `docs/modules/send-mms.md` | *Send an MMS* → **Docs** |
+| `docs/modules/send-whatsapp.md` | *Send a WhatsApp Message* → **Docs** |
+| `docs/modules/send-rcs.md` | *Send an RCS Message* → **Docs** |
+| `docs/modules/watch-events.md` | *Watch Events* → **Docs** |
+
+Do this even if you never submit for review — it is what makes the app usable by anyone in
+the org who did not build it.
+
 ## Publish
 
 A custom app is private to your organisation by default, which is almost certainly what you
-want here. Anyone in the org can use it in their scenarios straight away.
+want here. Anyone in the org can use it in their scenarios straight away, and there is
+nothing further to do.
 
-To list it publicly in Make's app directory, use **Request app review** in the app settings.
-That kicks off a review by Make and requires the Docs section to be filled in.
+### Submitting for app review
+
+Only needed to list the app publicly in Make's directory. Use **Request app review** in the
+app settings. Before submitting, work through this:
+
+- [ ] **App icon** — a square PNG, 512×512. **Not yet available.** The only existing
+      Kudosity asset is the n8n wordmark (218×48, white-on-transparent), which is the wrong
+      shape and invisible on a light background. Ask for a square logomark from whoever
+      owns brand assets.
+- [ ] **Docs filled in** for the app and every module — see above.
+- [ ] **Labels and descriptions** on every parameter, written for a scenario builder rather
+      than an API consumer.
+- [ ] **Connection validated** — the app must verify credentials on connect, which
+      `connections/kudosity/api.imljson` already does.
+- [ ] **Errors surface usefully** — confirm `base.imljson` renders real Kudosity errors
+      readably, not as a raw body dump. This is still unverified; see
+      [Confirm against the live API](#confirm-against-the-live-api).
+- [ ] **No secrets committed** anywhere in the app definition — keys belong in the
+      connection only.
+- [ ] **Every module tested** end to end against a live account.
+- [ ] **Interface and sample data** generated for each module, so users see real output
+      fields when mapping. These are deliberately absent from this repo.
+
+Two of these — the icon and the interface/sample files — cannot be completed from this
+repo alone, so budget for them before submitting.
 
 ## Layout
 
@@ -144,6 +187,7 @@ modules/
   sendWhatsApp/                   POST /whatsapp/messages
   sendRcs/                        POST /rcs/messages
 webhooks/events/                  Managed webhook trigger
+docs/                             User-facing help text for Make's Docs sections
 ```
 
 Each module directory holds `api.imljson` (the request) and `parameters.imljson` (the
