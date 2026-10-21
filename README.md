@@ -101,12 +101,19 @@ Fine for a one-time import, but you will be pasting JSON by hand.
    | Step | Where in Make | File from this repo |
    |---|---|---|
    | 1 | Base | `base.imljson` |
-   | 2 | Connections → add, type **API Key** → Communication | `connections/kudosity/api.imljson` |
-   | 3 | Connections → same connection → Parameters | `connections/kudosity/parameters.imljson` |
-   | 4 | Webhooks → add, type **Webhook** → Communication | `webhooks/events/api.imljson` |
-   | 5 | Webhooks → same → Attach / Detach | `webhooks/events/attach.imljson`, `detach.imljson` |
-   | 6 | Webhooks → same → Parameters | `webhooks/events/parameters.imljson` |
-   | 7 | Modules → add, type **Action** | `modules/sendSms/*`, then the other three |
+   | 2 | Connections → add, type **API Key** → Communication | `connections/kudosity-v2/api.imljson` |
+   | 3 | Connections → same connection → Parameters | `connections/kudosity-v2/parameters.imljson` |
+   | 4 | Connections → add a second, type **API Key** → Communication | `connections/kudosity-v1/api.imljson` |
+   | 5 | Connections → same → Parameters | `connections/kudosity-v1/parameters.imljson` |
+   | 6 | Webhooks → add, type **Webhook** → Communication | `webhooks/v2Events/api.imljson` |
+   | 7 | Webhooks → same → Attach / Detach | `webhooks/v2Events/attach.imljson`, `detach.imljson` |
+   | 8 | Webhooks → same → Parameters | `webhooks/v2Events/parameters.imljson` |
+   | 9 | Webhooks → add a second | `webhooks/v1Inbound/*` — same three tabs |
+   | 10 | Modules → add, type **Action** | `modules/v2SendSms/*`, then the other three v2 modules |
+   | 11 | Modules → add the v1 modules | `modules/v1*` — eight of them, each with the **Kudosity V1** connection selected |
+
+   Each module must be bound to the right connection. A v1 module on the v2 connection
+   will fail to authenticate, and the error will not make the cause obvious.
    | 8 | Modules → add, type **Instant trigger**, linked to the webhook above | — |
 
    For each module, `api.imljson` goes in the **Communication** tab and
@@ -120,7 +127,8 @@ Before touching any modules:
 2. Click **Create a connection**, name it something like `Kudosity — production`, and paste
    your API key.
 3. Save. Make immediately fires the validation request in
-   `connections/kudosity/api.imljson` — a `GET /sms?limit=1`.
+   `connections/kudosity-v2/api.imljson` — a `GET /sms?limit=1`. The v1 connection tests
+   against `GET /get-client.json`.
 
 A green tick means the key is good. An error means either the key is wrong or the auth
 header shape has changed — check that the header is the raw key with no `Bearer` prefix.
@@ -176,7 +184,7 @@ app settings. Before submitting, work through this:
 - [ ] **Labels and descriptions** on every parameter, written for a scenario builder rather
       than an API consumer.
 - [ ] **Connection validated** — the app must verify credentials on connect, which
-      `connections/kudosity/api.imljson` already does.
+      `connections/kudosity-v2/api.imljson` already does.
 - [ ] **Errors surface usefully** — confirm `base.imljson` renders real Kudosity errors
       readably, not as a raw body dump. This is still unverified; see
       [Confirm against the live API](#confirm-against-the-live-api).
@@ -192,16 +200,36 @@ repo alone, so budget for them before submitting.
 ## Layout
 
 ```
-base.imljson                      Base URL, auth header, error handling
-connections/kudosity/             API-key connection + validation request
+base.imljson                      v2 base URL, auth header, error handling
+
+connections/
+  kudosity-v2/                    Raw API-key connection + validation request
+  kudosity-v1/                    Basic key:secret connection + validation request
+
 modules/
-  sendSms/                        POST /sms
-  sendMms/                        POST /mms
-  sendWhatsApp/                   POST /whatsapp/messages
-  sendRcs/                        POST /rcs/messages
-webhooks/events/                  Managed webhook trigger
+  v2SendSms/                      POST /sms
+  v2SendMms/                      POST /mms
+  v2SendWhatsApp/                 POST /whatsapp/messages
+  v2SendRcs/                      POST /rcs/messages
+  v1SendSms/                      POST /send-sms.json
+  v1CancelSms/                    POST /cancel-sms.json
+  v1GetDeliveryStatus/            GET  /get-delivery-status.json
+  v1FormatNumber/                 GET  /format-number.json
+  v1GetSenderIds/                 GET  /get-sender-ids.json
+  v1GetAccount/                   GET  /get-client.json
+  v1GetNumbers/                   GET  /get-numbers.json
+  v1GetReplies/                   GET  /get-sms-responses.json
+
+webhooks/
+  v2Events/                       Managed webhook, one subscription per event type
+  v1Inbound/                      Writes a number's forward URL on attach, clears on detach
+
 docs/                             User-facing help text for Make's Docs sections
 ```
+
+`base.imljson` carries the **v2** host and header. The v1 modules override both with an
+absolute URL and their own `Authorization`, so adding a v1 module does not require
+touching the base.
 
 Each module directory holds `api.imljson` (the request) and `parameters.imljson` (the
 fields shown in the scenario editor).
