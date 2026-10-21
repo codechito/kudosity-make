@@ -1,0 +1,12 @@
+{
+	"url": "https://api.transmitsms.com/format-number.json",
+	"method": "GET",
+		"headers": {
+			"Authorization": "Basic {{base64(connection.apiKey + ':' + connection.apiSecret)}}",
+			"Accept": "application/json"
+		},
+	"qs": { "msisdn": "{{parameters.msisdn}}", "countrycode": "{{parameters.countrycode}}" },
+	"response": {
+		"output": "{{body}}"
+	}
+}

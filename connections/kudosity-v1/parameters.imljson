@@ -1,0 +1,16 @@
+[
+	{
+		"name": "apiKey",
+		"type": "text",
+		"label": "API Key",
+		"required": true,
+		"help": "Find your API key in your Kudosity account under **Settings > API**."
+	},
+	{
+		"name": "apiSecret",
+		"type": "password",
+		"label": "API Secret",
+		"required": false,
+		"help": "Your Kudosity API secret. Try leaving this blank first — v1 may accept the key alone. If the connection is rejected, fill it in."
+	}
+]

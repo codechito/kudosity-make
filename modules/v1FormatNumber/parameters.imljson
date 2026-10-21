@@ -1,0 +1,4 @@
+[
+	{ "name": "msisdn", "type": "text", "label": "Number", "required": true },
+	{ "name": "countrycode", "type": "text", "label": "Country Code", "required": true, "default": "AU", "help": "Two-letter country code, e.g. AU." }
+]

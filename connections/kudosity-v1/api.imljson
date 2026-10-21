@@ -1,0 +1,16 @@
+{
+	"url": "https://api.transmitsms.com/get-client.json",
+	"method": "GET",
+	"headers": {
+		"Authorization": "Basic {{base64(parameters.apiKey + ':' + parameters.apiSecret)}}",
+		"Accept": "application/json"
+	},
+	"response": {
+		"error": {
+			"message": "[{{statusCode}}] Kudosity rejected these v1 credentials. Check Settings > API in your account. If you left the secret blank, try filling it in."
+		}
+	},
+	"log": {
+		"sanitize": ["request.headers.authorization"]
+	}
+}

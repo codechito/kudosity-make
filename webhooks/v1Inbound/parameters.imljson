@@ -1,0 +1,9 @@
+[
+	{
+		"name": "number",
+		"type": "text",
+		"label": "Virtual Number",
+		"required": true,
+		"help": "The Kudosity virtual number to receive on. Use the **Get Numbers** module to list the numbers on your account.\n\n**This replaces the number's existing forward URL.** If the number already feeds another system — a Salesforce or Eloqua integration, for example — that feed will stop. Kudosity provides no way to read the previous value back, so it cannot be restored automatically."
+	}
+]

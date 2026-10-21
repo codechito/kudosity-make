@@ -1,0 +1,12 @@
+{
+	"url": "https://api.transmitsms.com/get-sms-responses.json",
+	"method": "GET",
+		"headers": {
+			"Authorization": "Basic {{base64(connection.apiKey + ':' + connection.apiSecret)}}",
+			"Accept": "application/json"
+		},
+	"qs": { "message_id": "{{parameters.message_id}}" },
+	"response": {
+		"output": "{{body}}"
+	}
+}

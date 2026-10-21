@@ -1,0 +1,12 @@
+[
+	{ "name": "to", "type": "text", "label": "To", "required": true, "help": "Recipient number. Combine with Country Code for local-format numbers." },
+	{ "name": "message", "type": "text", "label": "Message", "required": true, "multiline": true },
+	{ "name": "from", "type": "text", "label": "From", "help": "Sender ID or virtual number. Leave blank to use the account default." },
+	{ "name": "countrycode", "type": "text", "label": "Country Code", "help": "Two-letter country code, used to expand local-format numbers (e.g. AU)." },
+	{ "name": "tracked_link_url", "type": "text", "label": "Tracked Link URL", "help": "URL to shorten and track. Put [tracked-link] in the message where it should appear." },
+	{ "name": "validity", "type": "number", "label": "Validity (Minutes)", "help": "Give up on delivery after this many minutes. Leave blank to let the carrier decide." },
+	{ "name": "send_at", "type": "text", "label": "Send At", "help": "Schedule for later, as YYYY-MM-DD HH:MM:SS. Leave blank to send now." },
+	{ "name": "dlr_callback", "type": "url", "label": "Delivery Receipt Callback URL", "help": "Where delivery receipts are POSTed. Use a Watch Inbound Messages webhook URL." },
+	{ "name": "reply_callback", "type": "url", "label": "Reply Callback URL", "help": "Where replies to this message are POSTed." },
+	{ "name": "link_hits_callback", "type": "url", "label": "Link Hits Callback URL", "help": "Where tracked-link clicks are POSTed." }
+]

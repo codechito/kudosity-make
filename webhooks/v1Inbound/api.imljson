@@ -1,0 +1,14 @@
+{
+	"output": {
+		"phone":       "{{ifempty(body.mobile, body.msisdn, body.from)}}",
+		"id":          "{{ifempty(body.message_id, body.id)}}",
+		"message":     "{{ifempty(body.response, body.message)}}",
+		"status":      "{{body.status}}",
+		"to":          "{{ifempty(body.to, body.longcode)}}",
+		"received_at": "{{ifempty(body.datetime, body.received_at)}}",
+		"raw":         "{{body}}"
+	},
+	"respond": {
+		"status": 200
+	}
+}

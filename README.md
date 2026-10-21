@@ -14,8 +14,21 @@ Sibling integrations: [`kudosity-n8n`](https://github.com/codechito/kudosity-n8n
 ## Status
 
 Scaffold. Endpoints and auth mirror the working n8n integration, but the app has not yet
-been imported into Make or run against the live API. Two details are inferred rather than
-observed — see [Confirm against the live API](#confirm-against-the-live-api).
+been imported into Make or run against the live API. Several details are inferred rather
+than observed — see [Confirm against the live API](#confirm-against-the-live-api).
+
+The app covers **both Kudosity APIs**, with a connection for each:
+
+| | V1 | V2 |
+|---|---|---|
+| Host | `api.transmitsms.com` | `api.transmitmessage.com/v2` |
+| Auth | Basic `key:secret` | Raw `Authorization: <key>` |
+| Channels | SMS | SMS, MMS, WhatsApp, RCS |
+| Inbound | A number's single forward URL | A subscription per event type |
+
+V1 is the API the Kudosity Salesforce and Eloqua integrations use; its endpoints and
+field names here are taken from those working calls. See [`docs/connections.md`](docs/connections.md)
+for which one applies to a given account.
 
 ## API reference
 
@@ -318,6 +331,13 @@ checked on first run:
   registers a *separate* webhook per event type. The `event_type` field in
   `attach.imljson` is an assumption — Kudosity may ignore it and send all event types to
   the URL, in which case add a filter after the trigger and drop the field.
+- **Whether V1 accepts a key with no secret.** The V1 connection marks the secret
+  optional so this can be settled by trying it. The Salesforce package sends
+  `key:secret` and is proven; key-only is untested. If the connection test fails with the
+  secret blank, make the field required.
+- **V1 inbound field names.** `v1Inbound/api.imljson` reads `mobile`/`msisdn`/`from` and
+  `response`/`message`, because v1 varies by callback type. The raw payload is passed
+  through so a missed field can be recovered from a real event.
 
 Module `interface.imljson` and `samples.imljson` files are intentionally absent. Generate
 them in the Apps Editor from a real response rather than hand-writing them.

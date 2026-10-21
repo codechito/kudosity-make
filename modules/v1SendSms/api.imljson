@@ -1,0 +1,23 @@
+{
+	"url": "https://api.transmitsms.com/send-sms.json",
+	"method": "POST",
+		"headers": {
+			"Authorization": "Basic {{base64(connection.apiKey + ':' + connection.apiSecret)}}",
+			"Accept": "application/json"
+		},
+	"body": {
+		"to": "{{parameters.to}}",
+		"message": "{{parameters.message}}",
+		"from": "{{parameters.from}}",
+		"countrycode": "{{parameters.countrycode}}",
+		"tracked_link_url": "{{parameters.tracked_link_url}}",
+		"validity": "{{parameters.validity}}",
+		"send_at": "{{parameters.send_at}}",
+		"dlr_callback": "{{parameters.dlr_callback}}",
+		"reply_callback": "{{parameters.reply_callback}}",
+		"link_hits_callback": "{{parameters.link_hits_callback}}"
+	},
+	"response": {
+		"output": "{{body}}"
+	}
+}
