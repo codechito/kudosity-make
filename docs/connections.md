@@ -21,14 +21,21 @@ If your Kudosity account predates the v2 API, or you are already integrating thr
 Salesforce or Eloqua, you are on v1 — those integrations use it. If you were issued a
 single API key with no secret, you are on v2.
 
-## The two are not interchangeable
+## One key, two schemes
 
-A V2 key will not authenticate a V1 module and the reverse is equally true. This was
-tested directly on 22 Oct 2026: a V2 sandbox key was rejected by every V1 endpoint under
-Basic `key:`, Basic `:key`, Basic `key:key`, a raw header, `Bearer`, `x-api-key` and a
-query parameter. The same key returned 200 against V2 with `x-api-key`.
+The API **key is the same for both**. What differs is what else is needed and where it
+goes:
 
-V1 needs **both** the key and its secret. V2 needs **only** the key.
+- **V2** takes the key alone, in an `x-api-key` header.
+- **V1** takes the same key *plus* its secret, as HTTP Basic over `key:secret`.
+
+Verified against the live API on 22 Oct 2026. The key alone was rejected by every V1
+endpoint — under Basic `key:`, Basic `:key`, Basic `key:key`, a raw header, `Bearer`,
+`x-api-key` and a query parameter — and accepted the moment the secret was paired with
+it. The same key alone returned 200 against V2.
+
+So a V1 connection genuinely needs both fields, and a V2 connection genuinely needs only
+one. Both can be found under **Settings > API** in the Kudosity account.
 
 ## One host, two APIs
 
