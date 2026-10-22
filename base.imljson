@@ -5,10 +5,12 @@
 	},
 	"response": {
 		"error": {
-			"message": "[{{statusCode}}] {{ifempty(body.error.message, body.message, body)}}"
+			"message": "[{{statusCode}}] {{ifempty(body.error.description, body.error.message, body.status, body.message, body)}}"
 		}
 	},
 	"log": {
-		"sanitize": ["request.headers.authorization"]
+		"sanitize": [
+			"request.headers.authorization"
+		]
 	}
 }

@@ -7,10 +7,12 @@
 	},
 	"response": {
 		"error": {
-			"message": "[{{statusCode}}] Kudosity rejected these v1 credentials. Check Settings > API in your account. If you left the secret blank, try filling it in."
+			"message": "[{{statusCode}}] {{ifempty(body.error.description, body.error.message, 'Kudosity rejected these v1 credentials')}}. Check Settings > API in your account. If you left the secret blank, try filling it in."
 		}
 	},
 	"log": {
-		"sanitize": ["request.headers.authorization"]
+		"sanitize": [
+			"request.headers.authorization"
+		]
 	}
 }

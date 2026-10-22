@@ -353,8 +353,18 @@ start hitting rate limits — Kudosity's published limits are in the
 Two details were inferred from the n8n integration rather than observed, and should be
 checked on first run:
 
-- **Error shape.** `base.imljson` renders errors as `body.error.message`, falling back to
-  `body.message`. Adjust once you have seen a real error body.
+- ~~**Error shape.**~~ **Answered 22 Oct 2026.** The two APIs differ, and neither used
+  the field originally guessed at:
+
+  ```
+  v1  {"error":{"code":"AUTH_FAILED","description":"The auth data you have provided is invalid."}}
+  v2  {"status":"Invalid api key"}
+  ```
+
+  `base.imljson` now tries `body.error.description`, then `body.error.message`, then
+  `body.status`, then `body.message`, then the raw body. Captured from a live 401 against
+  both hosts — see `../kudosity-n8n/scripts/live-check.js`. Still worth confirming a
+  non-auth error (a malformed recipient, say) uses the same shape.
 - **Webhook attach payload.** The n8n integration sends only `url` and `webhook_name`, and
   registers a *separate* webhook per event type. The `event_type` field in
   `attach.imljson` is an assumption — Kudosity may ignore it and send all event types to

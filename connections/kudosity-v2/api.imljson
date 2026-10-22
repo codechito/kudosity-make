@@ -9,10 +9,12 @@
 	},
 	"response": {
 		"error": {
-			"message": "[{{statusCode}}] Kudosity rejected the API key. Check Settings > API in your Kudosity account."
+			"message": "[{{statusCode}}] {{ifempty(body.status, body.error.message, 'Kudosity rejected the API key')}}. Check Settings > API in your Kudosity account."
 		}
 	},
 	"log": {
-		"sanitize": ["request.headers.authorization"]
+		"sanitize": [
+			"request.headers.authorization"
+		]
 	}
 }
