@@ -9,7 +9,7 @@
 	},
 	"response": {
 		"error": {
-			"message": "[{{statusCode}}] {{ifempty(body.status, body.error.message, 'Kudosity rejected the API key')}}. Check Settings > API in your Kudosity account."
+			"message": "{{kudosityError(body, statusCode, 'v2')}}"
 		}
 	},
 	"log": {

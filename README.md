@@ -101,6 +101,7 @@ Fine for a one-time import, but you will be pasting JSON by hand.
    | Step | Where in Make | File from this repo |
    |---|---|---|
    | 1 | Base | `base.imljson` |
+   | 1b | Functions → add, named `kudosityError` | `functions/kudosityError.js` |
    | 2 | Connections → add, type **API Key** → Communication | `connections/kudosity-v2/api.imljson` |
    | 3 | Connections → same connection → Parameters | `connections/kudosity-v2/parameters.imljson` |
    | 4 | Connections → add a second, type **API Key** → Communication | `connections/kudosity-v1/api.imljson` |
@@ -201,6 +202,7 @@ repo alone, so budget for them before submitting.
 
 ```
 base.imljson                      v2 base URL, auth header, error handling
+functions/kudosityError.js        Turns API errors into messages that say what to do
 
 connections/
   kudosity-v2/                    Raw API-key connection + validation request

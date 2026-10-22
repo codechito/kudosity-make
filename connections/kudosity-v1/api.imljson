@@ -7,7 +7,7 @@
 	},
 	"response": {
 		"error": {
-			"message": "[{{statusCode}}] {{ifempty(body.error.description, body.error.message, body.error, 'Kudosity rejected these v1 credentials')}}. v1 needs both the API key and its secret \u2014 check Settings > API in your account."
+			"message": "{{kudosityError(body, statusCode, 'v1')}}"
 		}
 	},
 	"log": {

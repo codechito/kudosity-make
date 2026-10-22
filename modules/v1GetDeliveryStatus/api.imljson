@@ -10,6 +10,9 @@
 		"msisdn": "{{parameters.msisdn}}"
 	},
 	"response": {
-		"output": "{{body}}"
+		"output": "{{body}}",
+		"error": {
+			"message": "{{kudosityError(body, statusCode, 'v1')}}"
+		}
 	}
 }

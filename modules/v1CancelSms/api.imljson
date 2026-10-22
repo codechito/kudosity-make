@@ -1,12 +1,17 @@
 {
 	"url": "https://api.transmitsms.com/cancel-sms.json",
 	"method": "POST",
-		"headers": {
-			"Authorization": "Basic {{base64(connection.apiKey + ':' + connection.apiSecret)}}",
-			"Accept": "application/json"
-		},
-	"body": { "id": "{{parameters.id}}" },
+	"headers": {
+		"Authorization": "Basic {{base64(connection.apiKey + ':' + connection.apiSecret)}}",
+		"Accept": "application/json"
+	},
+	"body": {
+		"id": "{{parameters.id}}"
+	},
 	"response": {
-		"output": "{{body}}"
+		"output": "{{body}}",
+		"error": {
+			"message": "{{kudosityError(body, statusCode, 'v1')}}"
+		}
 	}
 }

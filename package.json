@@ -1,0 +1,10 @@
+{
+  "name": "kudosity-make",
+  "private": true,
+  "description": "Make custom app for the Kudosity messaging API",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "validate": "node -e \"require('fs').readdirSync('.',{recursive:true}).filter(f=>f.endsWith('.imljson')).forEach(f=>{try{JSON.parse(require('fs').readFileSync(f))}catch(e){console.error('INVALID',f,e.message);process.exit(1)}});console.log('all imljson parse')\""
+  },
+  "license": "MIT"
+}

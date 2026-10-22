@@ -1,12 +1,14 @@
 {
 	"url": "https://api.transmitsms.com/get-client.json",
 	"method": "GET",
-		"headers": {
-			"Authorization": "Basic {{base64(connection.apiKey + ':' + connection.apiSecret)}}",
-			"Accept": "application/json"
-		},
-	
+	"headers": {
+		"Authorization": "Basic {{base64(connection.apiKey + ':' + connection.apiSecret)}}",
+		"Accept": "application/json"
+	},
 	"response": {
-		"output": "{{body}}"
+		"output": "{{body}}",
+		"error": {
+			"message": "{{kudosityError(body, statusCode, 'v1')}}"
+		}
 	}
 }

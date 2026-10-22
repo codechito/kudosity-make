@@ -1,12 +1,17 @@
 {
 	"url": "https://api.transmitsms.com/edit-number-options.json",
 	"method": "GET",
-		"headers": {
-			"Authorization": "Basic {{base64(connection.apiKey + ':' + connection.apiSecret)}}",
-			"Accept": "application/json"
-		},
+	"headers": {
+		"Authorization": "Basic {{base64(connection.apiKey + ':' + connection.apiSecret)}}",
+		"Accept": "application/json"
+	},
 	"qs": {
 		"number": "{{webhook.registeredNumber}}",
 		"forward_url": ""
+	},
+	"response": {
+		"error": {
+			"message": "{{kudosityError(body, statusCode, 'v1')}}"
+		}
 	}
 }
