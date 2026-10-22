@@ -379,10 +379,17 @@ checked on first run:
   readable sentence.
 
   Captured live — see `../kudosity-n8n/scripts/live-check.js`.
-- **Webhook attach payload.** The n8n integration sends only `url` and `webhook_name`, and
-  registers a *separate* webhook per event type. The `event_type` field in
-  `attach.imljson` is an assumption — Kudosity may ignore it and send all event types to
-  the URL, in which case add a filter after the trigger and drop the field.
+- ~~**Webhook attach payload.**~~ **Answered 22 Oct 2026.** It was wrong in both
+  integrations. The API takes **one** webhook carrying every event type in a
+  `filter.event_type` array, and the label field is `name`:
+
+  ```json
+  { "name": "Make", "url": "...", "filter": { "event_type": ["SMS_INBOUND", "OPT_OUT"] } }
+  ```
+
+  A `webhook_name` field is rejected outright — `400 {"error":"invalid field in request:
+  json: unknown field \"webhook_name\""}` — so registration had never worked. Confirmed by
+  registering and deleting a real webhook on the sandbox account.
 - **Whether V1 accepts a key with no secret.** The V1 connection marks the secret
   optional so this can be settled by trying it. The Salesforce package sends
   `key:secret` and is proven; key-only is untested. If the connection test fails with the

@@ -2,9 +2,11 @@
 	"url": "/webhook",
 	"method": "POST",
 	"body": {
+		"name": "Make",
 		"url": "{{webhook.url}}",
-		"webhook_name": "Make - {{parameters.eventType}}",
-		"event_type": "{{parameters.eventType}}"
+		"filter": {
+			"event_type": "{{parameters.eventTypes}}"
+		}
 	},
 	"response": {
 		"data": {
