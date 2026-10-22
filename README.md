@@ -22,7 +22,7 @@ The app covers **both Kudosity APIs**, with a connection for each:
 | | V1 | V2 |
 |---|---|---|
 | Host | `api.transmitsms.com` | `api.transmitmessage.com/v2` |
-| Auth | Basic `key:secret` | Raw `Authorization: <key>` |
+| Auth | Basic `key:secret` | `x-api-key: <key>` |
 | Channels | SMS | SMS, MMS, WhatsApp, RCS |
 | Inbound | A number's single forward URL | A subscription per event type |
 
@@ -356,15 +356,22 @@ checked on first run:
 - ~~**Error shape.**~~ **Answered 22 Oct 2026.** The two APIs differ, and neither used
   the field originally guessed at:
 
+  There are four, not one. `error` is an **object** on v1 and a **string** on v2, and one
+  response is not JSON at all:
+
   ```
-  v1  {"error":{"code":"AUTH_FAILED","description":"The auth data you have provided is invalid."}}
-  v2  {"status":"Invalid api key"}
+  v1 Basic, bad creds   {"error":{"code":"AUTH_FAILED","description":"The auth data you have provided is invalid."}}
+  v1 non-Basic header   Authorisation failed                 <- plain text
+  v2 bad key            {"status":"Unauthorized"} or {"status":"Invalid api key"}
+  v2 validation (400)   {"error":"sender: required"}         <- error is a string
   ```
 
-  `base.imljson` now tries `body.error.description`, then `body.error.message`, then
-  `body.status`, then `body.message`, then the raw body. Captured from a live 401 against
-  both hosts — see `../kudosity-n8n/scripts/live-check.js`. Still worth confirming a
-  non-auth error (a malformed recipient, say) uses the same shape.
+  `base.imljson` now tries `body.error.description`, `body.error.message`, `body.error`,
+  `body.status`, `body.message`, then the raw body — the third entry being what catches
+  the string form. The plain-text case falls through to the raw body, which is already a
+  readable sentence.
+
+  Captured live — see `../kudosity-n8n/scripts/live-check.js`.
 - **Webhook attach payload.** The n8n integration sends only `url` and `webhook_name`, and
   registers a *separate* webhook per event type. The `event_type` field in
   `attach.imljson` is an assumption — Kudosity may ignore it and send all event types to

@@ -5,7 +5,7 @@
 		"limit": 1
 	},
 	"headers": {
-		"Authorization": "{{parameters.apiKey}}"
+		"x-api-key": "{{parameters.apiKey}}"
 	},
 	"response": {
 		"error": {
@@ -14,7 +14,7 @@
 	},
 	"log": {
 		"sanitize": [
-			"request.headers.authorization"
+			"request.headers.x-api-key"
 		]
 	}
 }

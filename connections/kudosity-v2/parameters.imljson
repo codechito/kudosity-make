@@ -4,6 +4,6 @@
 		"type": "text",
 		"label": "API Key",
 		"required": true,
-		"help": "Find your API key in your Kudosity account under **Settings > API**. It is sent as a raw `Authorization` header, with no `Bearer` prefix."
+		"help": "Find your API key in your Kudosity account under **Settings > API**. It is sent as the `x-api-key` header."
 	}
 ]

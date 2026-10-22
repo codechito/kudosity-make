@@ -7,7 +7,7 @@ authentication scheme.
 |---|---|---|
 | Host | `api.transmitsms.com` | `api.transmitmessage.com/v2` |
 | Credentials | API key **and** secret | API key only |
-| Header | `Authorization: Basic base64(key:secret)` | `Authorization: <key>` — raw, no `Bearer` |
+| Header | `Authorization: Basic base64(key:secret)` | `x-api-key: <key>` |
 | Encoding | Form-encoded | JSON |
 | Channels | SMS | SMS, MMS, WhatsApp, RCS |
 
