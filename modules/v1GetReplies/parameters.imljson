@@ -1,1 +1,9 @@
-[{ "name": "message_id", "type": "text", "label": "Message ID", "help": "Limit replies to one sent message. Leave blank for all recent replies." }]
+[
+	{
+		"name": "message_id",
+		"type": "text",
+		"label": "Message ID",
+		"required": true,
+		"help": "Replies to this sent message. The API requires it \u2014 there is no all-recent-replies call."
+	}
+]

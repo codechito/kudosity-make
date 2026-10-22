@@ -1,1 +1,16 @@
-[{ "name": "message_id", "type": "text", "label": "Message ID", "required": true, "help": "The ID returned when the message was sent." }]
+[
+	{
+		"name": "message_id",
+		"type": "text",
+		"label": "Message ID",
+		"required": true,
+		"help": "The ID returned when the message was sent."
+	},
+	{
+		"name": "msisdn",
+		"type": "text",
+		"label": "Recipient Number",
+		"required": true,
+		"help": "The number the message was sent to. The API requires this alongside the message ID."
+	}
+]

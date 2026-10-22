@@ -1,11 +1,14 @@
 {
-	"url": "https://api.transmitsms.com/get-delivery-status.json",
+	"url": "https://api.transmitsms.com/get-sms-delivery-status.json",
 	"method": "GET",
-		"headers": {
-			"Authorization": "Basic {{base64(connection.apiKey + ':' + connection.apiSecret)}}",
-			"Accept": "application/json"
-		},
-	"qs": { "message_id": "{{parameters.message_id}}" },
+	"headers": {
+		"Authorization": "Basic {{base64(connection.apiKey + ':' + connection.apiSecret)}}",
+		"Accept": "application/json"
+	},
+	"qs": {
+		"message_id": "{{parameters.message_id}}",
+		"msisdn": "{{parameters.msisdn}}"
+	},
 	"response": {
 		"output": "{{body}}"
 	}

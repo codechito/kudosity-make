@@ -5,7 +5,7 @@
 	},
 	"response": {
 		"error": {
-			"message": "[{{statusCode}}] {{ifempty(body.error.description, body.error.message, body.error, body.status, body.message, body)}}"
+			"message": "[{{statusCode}}] {{ifempty(body.error.description, body.error.detail, body.error.message, body.error, body.status, body.message, body)}}{{if(body.error.issues, ' \u2014 ' + join(map(body.error.issues, 'name') , ', '), '')}}"
 		}
 	},
 	"log": {

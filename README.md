@@ -360,11 +360,18 @@ checked on first run:
   response is not JSON at all:
 
   ```
-  v1 Basic, bad creds   {"error":{"code":"AUTH_FAILED","description":"The auth data you have provided is invalid."}}
-  v1 non-Basic header   Authorisation failed                 <- plain text
-  v2 bad key            {"status":"Unauthorized"} or {"status":"Invalid api key"}
-  v2 validation (400)   {"error":"sender: required"}         <- error is a string
+  v1 Basic, bad creds   {"error":{"code":"AUTH_FAILED","description":"..."}}      error is an OBJECT
+  v1 field error        {"error":{"code":"FIELD_EMPTY","description":"..."}}
+  v1 non-Basic header   Authorisation failed                                     plain text, not JSON
+  v2 bad key            {"status":"Unauthorized"} / {"status":"Invalid api key"}
+  v2 simple validation  {"error":"sender: required"}                             error is a STRING
+  v2 rich validation    {"error":{"detail":"Request validation failed",
+                                  "issues":[{"message":"invalid sender","name":"sender"}],
+                                  "title":"Invalid Request"}}                    RFC7807-ish
   ```
+
+  Six shapes, and `error` is variously an object with `description`, an object with
+  `detail` and `issues`, or a bare string.
 
   `base.imljson` now tries `body.error.description`, `body.error.message`, `body.error`,
   `body.status`, `body.message`, then the raw body — the third entry being what catches
