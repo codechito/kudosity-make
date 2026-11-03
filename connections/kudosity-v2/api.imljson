@@ -5,7 +5,11 @@
 		"limit": 1
 	},
 	"headers": {
-		"x-api-key": "{{parameters.apiKey}}"
+		"x-api-key": "{{parameters.apiKey}}",
+		"User-Agent": "kudosity-make/0.1.0",
+		"X-Kudosity-Source": "kudosity-make",
+		"X-Kudosity-Source-Version": "0.1.0",
+		"X-Kudosity-Action": "connect"
 	},
 	"response": {
 		"error": {

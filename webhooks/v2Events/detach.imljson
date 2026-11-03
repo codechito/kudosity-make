@@ -1,4 +1,11 @@
 {
 	"url": "/webhook/{{webhook.webhookId}}",
-	"method": "DELETE"
+	"method": "DELETE",
+	"headers": {
+		"x-api-key": "{{connection.apiKey}}",
+		"User-Agent": "kudosity-make/0.1.0",
+		"X-Kudosity-Source": "kudosity-make",
+		"X-Kudosity-Source-Version": "0.1.0",
+		"X-Kudosity-Action": "trigger.unsubscribe"
+	}
 }

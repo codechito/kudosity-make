@@ -1,5 +1,6 @@
 {
   "name": "kudosity-make",
+  "version": "0.1.0",
   "private": true,
   "description": "Make custom app for the Kudosity messaging API",
   "scripts": {

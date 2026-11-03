@@ -3,7 +3,11 @@
 	"method": "POST",
 	"headers": {
 		"Authorization": "Basic {{base64(connection.apiKey + ':' + connection.apiSecret)}}",
-		"Accept": "application/json"
+		"Accept": "application/json",
+		"User-Agent": "kudosity-make/0.1.0",
+		"X-Kudosity-Source": "kudosity-make",
+		"X-Kudosity-Source-Version": "0.1.0",
+		"X-Kudosity-Action": "sms.send"
 	},
 	"body": {
 		"to": "{{parameters.to}}",

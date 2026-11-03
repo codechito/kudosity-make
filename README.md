@@ -350,6 +350,24 @@ start hitting rate limits — Kudosity's published limits are in the
 
 ---
 
+## What this app tells Kudosity
+
+Every request this app makes to Kudosity includes a few headers that identify the
+integration, so Kudosity can see how it is used and which versions are still in use:
+
+| Header | Example | Meaning |
+|---|---|---|
+| `User-Agent` | `kudosity-make/0.1.0` | This integration and its version |
+| `X-Kudosity-Source` | `kudosity-make` | This integration |
+| `X-Kudosity-Source-Version` | `0.1.0` | Its version |
+| `X-Kudosity-Action` | `sms.send` | What the request is for, e.g. `connect` (verifying a connection), `sms.send`, `trigger.subscribe` |
+
+These headers never contain message content, phone numbers, scenario names or anything
+about you. Your account is already identified by your API key, as it is for any request.
+
+The values are written into each request file. When releasing a new version, update
+`version` in `package.json` and every header to match — `npm test` fails until they agree.
+
 ## Confirm against the live API
 
 Two details were inferred from the n8n integration rather than observed, and should be
