@@ -1,66 +1,31 @@
 # TODO — Kudosity custom app for Make
 
-Status as of **21 Oct 2026**. Last commit 26 Aug 2026; three commits, 8 weeks idle. Local
-and `origin/main` are in sync, so nothing is outstanding elsewhere.
+Tasks are tracked in Jira, in the **SAL** project (Salesforce Integration) under the label
+`make`. That is a temporary home until an integrations project exists. Moved there on
+3 Nov 2026; this file is no longer the task list.
 
-Not tracked in Jira. There is no general integrations project — the convention is one per
-integration (SAL Salesforce, EQ Eloqua, SI Shopify) and none exists for Make. This file is
-the task list until that decision is made.
+All Make tickets: https://kudosity.atlassian.net/issues/?jql=project%3DSAL%20AND%20labels%3Dmake
 
-## What exists
+## Open
 
-| Piece | State |
+| Ticket | Task |
 |---|---|
-| `base.imljson` | Base URL, auth header, error rendering |
-| `connections/kudosity/` | API-key connection |
-| `modules/v2Send{Sms,Mms,WhatsApp,Rcs}/` | Four v2 send modules, `api` + `parameters` each |
-| `webhooks/v2Events/` | v2 trigger, one subscription per event type |
-| `connections/kudosity-v1/` | v1 connection — Basic `key:secret`, secret optional |
-| `modules/v1*` | Eight v1 modules: send, cancel, delivery status, format number, sender ids, account, numbers, replies |
-| `webhooks/v1Inbound/` | v1 trigger — registers a number's forward URL, clears it on detach |
-| `docs/` | User-facing help text for the app and all five modules |
+| [SAL-98](https://kudosity.atlassian.net/browse/SAL-98) | Import the app into the Apps Editor and validate connections |
+| [SAL-99](https://kudosity.atlassian.net/browse/SAL-99) | Generate interface and samples from real responses, smoke test V2 modules |
+| [SAL-100](https://kudosity.atlassian.net/browse/SAL-100) | Smoke test the V1 modules and V1 inbound webhook |
+| [SAL-101](https://kudosity.atlassian.net/browse/SAL-101) | Decide failed-send behaviour (stop vs Ignore route) |
+| [SAL-102](https://kudosity.atlassian.net/browse/SAL-102) | Submit the app for Make review |
+| [SAL-94](https://kudosity.atlassian.net/browse/SAL-94) | Tag API requests with source, version and action headers (shared with n8n) |
+| [SAL-103](https://kudosity.atlassian.net/browse/SAL-103) | Provision WhatsApp and RCS senders, or document the limit (shared with n8n) |
+| [SAL-104](https://kudosity.atlassian.net/browse/SAL-104) | Decide whether to move the repo to a company GitHub org (shared with n8n) |
 
-Endpoints mirror the n8n integration: `POST /sms`, `/mms`, `/whatsapp/messages`,
-`/rcs/messages` against `https://api.transmitmessage.com/v2`, with a raw
-`Authorization: <api key>` header and **no** `Bearer` prefix.
+## Done
 
-Further along than the n8n node in coverage — the docs are complete — but equally unproven.
+| Ticket | Work | Completed |
+|---|---|---|
+| [SAL-112](https://kudosity.atlassian.net/browse/SAL-112) | Scaffold the custom app, README and review docs | 26 Aug 2026 |
+| [SAL-113](https://kudosity.atlassian.net/browse/SAL-113) | Cover both APIs — V1 connection, modules and inbound webhook | 21 Oct 2026 |
+| [SAL-114](https://kudosity.atlassian.net/browse/SAL-114) | Fix V2 authentication and render the real API error shapes | 22 Oct 2026 |
+| [SAL-115](https://kudosity.atlassian.net/browse/SAL-115) | Webhook event-type filter, delivery-status endpoint and V1 credential | 22 Oct 2026 |
 
-## Blockers
-
-### 1. Never imported into Make, never run
-
-The app has not been loaded into the Apps Editor or executed against the live API. Nothing
-below can be confirmed until it has been.
-
-### 2. Two inferred details, both flagged in the README
-
-Carried over from the n8n integration by assumption rather than observation:
-
-- **Error shape.** `base.imljson` renders `body.error.message`, falling back to
-  `body.message`. Adjust once a real error body has been seen.
-- **Webhook attach payload.** `attach.imljson` sends an `event_type` field. The n8n
-  integration sends only `url` and `webhook_name` and registers a separate webhook per
-  event type. If Kudosity ignores `event_type` and sends every type to the URL, drop the
-  field and add a filter after the trigger instead.
-
-### 3. `interface.imljson` and `samples.imljson` are absent
-
-Deliberately — they should be generated in the Apps Editor from real responses rather than
-hand-written. Blocked on the first live run.
-
-## Then
-
-- Run each of the four send modules against a real account.
-- Register a webhook, send a real inbound message, and confirm the trigger fires with the
-  payload the docs describe.
-- Decide whether a failed send should stop the scenario or take the **Ignore** route — the
-  README raises this and leaves it open.
-- Submit for Make app review once the above is proven. The `docs/` section exists
-  specifically for that review.
-
-## Shared with the n8n node
-
-Both integrations hit the same API and carry the **same unresolved question** about
-per-event-type webhook registration. Answering it once with a live account settles it for
-both — worth doing before either goes further. See `../kudosity-n8n/TODO.md`.
+Put the ticket key in commit messages (e.g. `fix: ... (SAL-98)`), as the Salesforce repos do.
