@@ -1,0 +1,66 @@
+{
+  "$comment": "What the Make app is made of. scripts/deploy.js builds the app from this plus the files it points at; scripts/smoke-test.js uses it to know what to run. Keep in step with the folders.",
+  "app": {
+    "name": "kudosity-messaging-3l8g1e",
+    "version": 1,
+    "label": "Kudosity",
+    "description": "Kudosity is a business platform that helps organisations send SMS, MMS, WhatsApp and RCS messages. Our workflow automation enables businesses to send order updates from e-commerce platforms, automate lead nurture programs, and improve customer engagement.",
+    "theme": "#4C23CC",
+    "icon": "assets/icon.png",
+    "language": "en",
+    "countries": [],
+    "readme": "docs/app.md"
+  },
+  "functions": [
+    { "name": "kudosityError", "code": "functions/kudosityError.js" }
+  ],
+  "base": "base.imljson",
+  "connections": [
+    {
+      "key": "v2",
+      "label": "Kudosity V2",
+      "type": "apikey",
+      "dir": "connections/kudosity-v2"
+    },
+    {
+      "key": "v1",
+      "label": "Kudosity V1",
+      "type": "apikey",
+      "dir": "connections/kudosity-v1"
+    }
+  ],
+  "webhooks": [
+    {
+      "key": "v2Events",
+      "label": "Kudosity V2 Events",
+      "type": "web",
+      "connection": "v2",
+      "dir": "webhooks/v2Events"
+    },
+    {
+      "key": "v1Inbound",
+      "label": "Kudosity V1 Inbound SMS",
+      "type": "web",
+      "connection": "v1",
+      "dir": "webhooks/v1Inbound"
+    }
+  ],
+  "modules": [
+    { "name": "v2SendSms", "label": "Send an SMS", "description": "Sends an SMS through the Kudosity V2 API.", "type": "action", "connection": "v2" },
+    { "name": "v2SendMms", "label": "Send an MMS", "description": "Sends an MMS with one or more media attachments.", "type": "action", "connection": "v2" },
+    { "name": "v2SendWhatsApp", "label": "Send a WhatsApp Message", "description": "Sends a WhatsApp text or approved template message, with optional SMS fallback.", "type": "action", "connection": "v2" },
+    { "name": "v2SendRcs", "label": "Send an RCS Message", "description": "Sends an RCS text or media message, with optional SMS fallback.", "type": "action", "connection": "v2" },
+    { "name": "v2MakeApiCall", "label": "Make an API Call", "description": "Performs an arbitrary authorized call to the Kudosity V2 API.", "type": "universal", "connection": "v2" },
+    { "name": "v1SendSms", "label": "Send an SMS (V1)", "description": "Sends an SMS through the Kudosity V1 API.", "type": "action", "connection": "v1" },
+    { "name": "v1CancelSms", "label": "Cancel a Scheduled SMS (V1)", "description": "Cancels a scheduled SMS.", "type": "action", "connection": "v1" },
+    { "name": "v1GetDeliveryStatus", "label": "Get Delivery Status (V1)", "description": "Gets the delivery status of a sent SMS.", "type": "action", "connection": "v1" },
+    { "name": "v1FormatNumber", "label": "Format a Number (V1)", "description": "Formats a mobile number to international format.", "type": "action", "connection": "v1" },
+    { "name": "v1GetSenderIds", "label": "Get Sender IDs (V1)", "description": "Lists the sender IDs and numbers this account may send from.", "type": "action", "connection": "v1" },
+    { "name": "v1GetAccount", "label": "Get Account Balance (V1)", "description": "Gets the account balance and its currency.", "type": "action", "connection": "v1" },
+    { "name": "v1GetNumbers", "label": "List Virtual Numbers (V1)", "description": "Lists the virtual numbers leased by the account, or those available to lease.", "type": "search", "connection": "v1" },
+    { "name": "v1GetReplies", "label": "List Replies (V1)", "description": "Lists replies to a sent message.", "type": "search", "connection": "v1" },
+    { "name": "v1MakeApiCall", "label": "Make an API Call (V1)", "description": "Performs an arbitrary authorized call to the Kudosity V1 API.", "type": "universal", "connection": "v1" },
+    { "name": "watchEvents", "label": "Watch Events", "description": "Triggers on Kudosity V2 events such as inbound SMS, delivery status and opt-outs.", "type": "instant", "connection": "v2", "webhook": "v2Events" },
+    { "name": "watchInboundSms", "label": "Watch Inbound SMS (V1)", "description": "Triggers when a virtual number receives an SMS.", "type": "instant", "connection": "v1", "webhook": "v1Inbound" }
+  ]
+}
