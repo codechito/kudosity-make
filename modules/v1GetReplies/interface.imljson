@@ -1,0 +1,52 @@
+[
+	{
+		"name": "id",
+		"type": "number",
+		"label": "Reply ID"
+	},
+	{
+		"name": "message_id",
+		"type": "number",
+		"label": "Message ID"
+	},
+	{
+		"name": "list_id",
+		"type": "number",
+		"label": "List ID"
+	},
+	{
+		"name": "received_at",
+		"type": "date",
+		"label": "Received At"
+	},
+	{
+		"name": "first_name",
+		"type": "text",
+		"label": "First Name"
+	},
+	{
+		"name": "last_name",
+		"type": "text",
+		"label": "Last Name"
+	},
+	{
+		"name": "msisdn",
+		"type": "text",
+		"label": "From Number"
+	},
+	{
+		"name": "response",
+		"type": "text",
+		"label": "Reply Text"
+	},
+	{
+		"name": "longcode",
+		"type": "text",
+		"label": "Virtual Number"
+	},
+	{
+		"name": "original_message",
+		"type": "text",
+		"label": "Original Message"
+	}
+]

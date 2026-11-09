@@ -1,0 +1,93 @@
+[
+	{
+		"name": "id",
+		"type": "text",
+		"label": "Message ID"
+	},
+	{
+		"name": "message_ref",
+		"type": "text",
+		"label": "Message Reference"
+	},
+	{
+		"name": "sender",
+		"type": "text",
+		"label": "Sender"
+	},
+	{
+		"name": "recipient",
+		"type": "text",
+		"label": "Recipient"
+	},
+	{
+		"name": "content_type",
+		"type": "text",
+		"label": "Content Type"
+	},
+	{
+		"name": "content",
+		"type": "collection",
+		"label": "Content",
+		"spec": [
+			{
+				"name": "text",
+				"type": "collection",
+				"label": "Text",
+				"spec": [
+					{
+						"name": "message",
+						"type": "text",
+						"label": "Message"
+					}
+				]
+			},
+			{
+				"name": "template",
+				"type": "collection",
+				"label": "Template",
+				"spec": [
+					{
+						"name": "name",
+						"type": "text",
+						"label": "Name"
+					},
+					{
+						"name": "locale",
+						"type": "text",
+						"label": "Locale"
+					},
+					{
+						"name": "parameters",
+						"type": "array",
+						"label": "Parameters",
+						"spec": {
+							"type": "text"
+						}
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "sms_fallback",
+		"type": "collection",
+		"label": "SMS Fallback",
+		"spec": [
+			{
+				"name": "sender",
+				"type": "text",
+				"label": "Sender"
+			},
+			{
+				"name": "message",
+				"type": "text",
+				"label": "Message"
+			}
+		]
+	},
+	{
+		"name": "created_at",
+		"type": "date",
+		"label": "Created At"
+	}
+]

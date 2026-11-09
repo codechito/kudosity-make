@@ -1,0 +1,22 @@
+[
+	{
+		"name": "number",
+		"type": "text",
+		"label": "Number"
+	},
+	{
+		"name": "price",
+		"type": "number",
+		"label": "Price"
+	},
+	{
+		"name": "next_charge",
+		"type": "date",
+		"label": "Next Charge"
+	},
+	{
+		"name": "auto_renew",
+		"type": "boolean",
+		"label": "Auto Renew"
+	}
+]

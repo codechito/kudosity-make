@@ -12,7 +12,8 @@
 		"sender": "{{parameters.sender}}",
 		"recipient": "{{parameters.recipient}}",
 		"message": "{{parameters.message}}",
-		"message_ref": "{{parameters.message_ref}}"
+		"message_ref": "{{parameters.message_ref}}",
+		"track_links": "{{parameters.track_links}}"
 	},
 	"response": {
 		"output": "{{body}}"

@@ -24,6 +24,8 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const pkg = require(path.join(ROOT, 'package.json'));
 const read = (rel) => JSON.parse(fs.readFileSync(path.join(ROOT, rel), 'utf8'));
+/** Every request in a file: api.imljson may be one request or an array of conditional ones. */
+const requests = (rel) => [].concat(read(rel));
 
 const EXPECTED = {
     'connections/kudosity-v1/api.imljson': 'connect',
@@ -35,7 +37,9 @@ const EXPECTED = {
     'modules/v1GetNumbers/api.imljson': 'numbers.get',
     'modules/v1GetReplies/api.imljson': 'replies.get',
     'modules/v1GetSenderIds/api.imljson': 'senderids.get',
+    'modules/v1MakeApiCall/api.imljson': 'api.call',
     'modules/v1SendSms/api.imljson': 'sms.send',
+    'modules/v2MakeApiCall/api.imljson': 'api.call',
     'modules/v2SendMms/api.imljson': 'mms.send',
     'modules/v2SendRcs/api.imljson': 'rcs.send',
     'modules/v2SendSms/api.imljson': 'sms.send',
@@ -51,7 +55,8 @@ function requestFiles() {
     const found = [];
     for (const dir of ['connections', 'modules']) {
         for (const name of fs.readdirSync(path.join(ROOT, dir))) {
-            found.push(`${dir}/${name}/api.imljson`);
+            // Instant triggers have no api.imljson: their webhook makes the requests.
+            if (fs.existsSync(path.join(ROOT, dir, name, 'api.imljson'))) found.push(`${dir}/${name}/api.imljson`);
         }
     }
     for (const name of fs.readdirSync(path.join(ROOT, 'webhooks'))) {
@@ -78,9 +83,10 @@ describe('usage tracking headers', () => {
 
     for (const [file, action] of Object.entries(EXPECTED)) {
         test(`${file} sends ${action}`, () => {
-            const headers = read(file).headers;
-            assertConstant(headers, file);
-            assert.strictEqual(headers['X-Kudosity-Action'], action, file);
+            for (const { headers } of requests(file)) {
+                assertConstant(headers, file);
+                assert.strictEqual(headers['X-Kudosity-Action'], action, file);
+            }
         });
     }
 
@@ -92,16 +98,16 @@ describe('usage tracking headers', () => {
         // Whether Make merges or replaces base headers when a module sets its own is
         // not verified, so files that set headers must also set their own auth.
         for (const file of Object.keys(EXPECTED)) {
-            const h = read(file).headers;
-            const v1 = file.includes('v1') || file.includes('kudosity-v1');
-            if (v1) assert.match(h.Authorization, /^Basic /, file);
-            else assert.ok(h['x-api-key'], `${file} has no x-api-key`);
+            for (const { headers: h } of requests(file)) {
+                const v1 = file.includes('v1') || file.includes('kudosity-v1');
+                if (v1) assert.match(h.Authorization, /^Basic /, file);
+                else assert.ok(h['x-api-key'], `${file} has no x-api-key`);
+            }
         }
     });
 
     test('no tracking header references message content or contact data', () => {
-        for (const file of [...Object.keys(EXPECTED), 'base.imljson']) {
-            const h = read(file).headers;
+        for (const file of [...Object.keys(EXPECTED), 'base.imljson']) for (const { headers: h } of requests(file)) {
             for (const key of ['User-Agent', 'X-Kudosity-Source', 'X-Kudosity-Source-Version', 'X-Kudosity-Action']) {
                 if (h[key] === undefined) continue;
                 assert.ok(!h[key].includes('{{'), `${file} ${key} is dynamic: ${h[key]}`);

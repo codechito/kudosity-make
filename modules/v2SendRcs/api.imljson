@@ -1,20 +1,56 @@
-{
-	"url": "/rcs/messages",
-	"method": "POST",
-	"headers": {
-		"x-api-key": "{{connection.apiKey}}",
-		"User-Agent": "kudosity-make/0.1.0",
-		"X-Kudosity-Source": "kudosity-make",
-		"X-Kudosity-Source-Version": "0.1.0",
-		"X-Kudosity-Action": "rcs.send"
+[
+	{
+		"condition": "{{parameters.content_type = 'text'}}",
+		"url": "/rcs/messages",
+		"method": "POST",
+		"headers": {
+			"x-api-key": "{{connection.apiKey}}",
+			"User-Agent": "kudosity-make/0.1.0",
+			"X-Kudosity-Source": "kudosity-make",
+			"X-Kudosity-Source-Version": "0.1.0",
+			"X-Kudosity-Action": "rcs.send"
+		},
+		"body": {
+			"sender": "{{parameters.sender}}",
+			"recipient": "{{parameters.recipient}}",
+			"content_type": "text",
+			"content": {
+				"text": {
+					"message": "{{parameters.message}}"
+				}
+			},
+			"message_ref": "{{parameters.message_ref}}",
+			"sms_fallback": "{{parameters.sms_fallback}}"
+		},
+		"response": {
+			"output": "{{body.data}}"
+		}
 	},
-	"body": {
-		"sender": "{{parameters.sender}}",
-		"recipient": "{{parameters.recipient}}",
-		"message": "{{parameters.message}}",
-		"message_ref": "{{parameters.message_ref}}"
-	},
-	"response": {
-		"output": "{{body}}"
+	{
+		"condition": "{{parameters.content_type = 'media'}}",
+		"url": "/rcs/messages",
+		"method": "POST",
+		"headers": {
+			"x-api-key": "{{connection.apiKey}}",
+			"User-Agent": "kudosity-make/0.1.0",
+			"X-Kudosity-Source": "kudosity-make",
+			"X-Kudosity-Source-Version": "0.1.0",
+			"X-Kudosity-Action": "rcs.send"
+		},
+		"body": {
+			"sender": "{{parameters.sender}}",
+			"recipient": "{{parameters.recipient}}",
+			"content_type": "media",
+			"content": {
+				"media": {
+					"file_url": "{{parameters.file_url}}"
+				}
+			},
+			"message_ref": "{{parameters.message_ref}}",
+			"sms_fallback": "{{parameters.sms_fallback}}"
+		},
+		"response": {
+			"output": "{{body.data}}"
+		}
 	}
-}
+]

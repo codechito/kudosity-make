@@ -10,12 +10,32 @@
 		"X-Kudosity-Action": "replies.get"
 	},
 	"qs": {
-		"message_id": "{{parameters.message_id}}"
+		"message_id": "{{parameters.message_id}}",
+		"max": 100
 	},
 	"response": {
-		"output": "{{body}}",
+		"output": {
+			"id": "{{item.id}}",
+			"message_id": "{{item.message_id}}",
+			"list_id": "{{item.list_id}}",
+			"received_at": "{{parseDate(item.received_at, 'YYYY-MM-DD HH:mm:ss', 'UTC')}}",
+			"first_name": "{{item.first_name}}",
+			"last_name": "{{item.last_name}}",
+			"msisdn": "{{item.msisdn}}",
+			"response": "{{item.response}}",
+			"longcode": "{{item.longcode}}",
+			"original_message": "{{item.original_message}}"
+		},
 		"error": {
 			"message": "{{kudosityError(body, statusCode, 'v1')}}"
-		}
+		},
+		"iterate": "{{body.responses}}",
+		"limit": "{{parameters.limit}}"
+	},
+	"pagination": {
+		"qs": {
+			"page": "{{pagination.page}}"
+		},
+		"condition": "{{body.page.number < body.page.count}}"
 	}
 }

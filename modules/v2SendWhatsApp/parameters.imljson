@@ -1,6 +1,94 @@
 [
-	{ "name": "sender",      "type": "text", "label": "Sender",    "required": true, "help": "WhatsApp-enabled sender registered with Kudosity." },
-	{ "name": "recipient",   "type": "text", "label": "Recipient", "required": true, "help": "E.164 format, e.g. +61412345678." },
-	{ "name": "message",     "type": "text", "label": "Message",   "required": true, "multiline": true },
-	{ "name": "message_ref", "type": "text", "label": "Message Reference" }
+	{
+		"name": "sender",
+		"type": "text",
+		"label": "Sender",
+		"required": false,
+		"help": "WhatsApp-enabled sender registered with Kudosity. Leave blank to use the account default."
+	},
+	{
+		"name": "recipient",
+		"type": "text",
+		"label": "Recipient",
+		"required": true,
+		"help": "Destination number in international format, e.g. 61412345678."
+	},
+	{
+		"name": "content_type",
+		"type": "select",
+		"label": "Content Type",
+		"required": true,
+		"default": "text",
+		"options": [
+			{
+				"label": "Text",
+				"value": "text",
+				"nested": [
+					{
+						"name": "message",
+						"type": "text",
+						"label": "Message",
+						"required": true,
+						"multiline": true
+					}
+				]
+			},
+			{
+				"label": "Template",
+				"value": "template",
+				"nested": [
+					{
+						"name": "template_name",
+						"type": "text",
+						"label": "Template Name",
+						"required": true,
+						"help": "Name of a WhatsApp template approved for this account."
+					},
+					{
+						"name": "template_locale",
+						"type": "text",
+						"label": "Template Locale",
+						"default": "en",
+						"help": "Locale of the template, e.g. en or en_US."
+					},
+					{
+						"name": "template_parameters",
+						"type": "array",
+						"label": "Template Parameters",
+						"spec": {
+							"type": "text",
+							"label": "Value"
+						},
+						"help": "Values for the template placeholders, in order: the first fills {{1}}, the second {{2}}."
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "message_ref",
+		"type": "text",
+		"label": "Message Reference",
+		"help": "Your own reference, echoed back on status webhooks. Useful for matching a send to its delivery receipt."
+	},
+	{
+		"name": "sms_fallback",
+		"type": "collection",
+		"label": "SMS Fallback",
+		"help": "Send an SMS instead if this message cannot be delivered.",
+		"spec": [
+			{
+				"name": "sender",
+				"type": "text",
+				"label": "Fallback Sender",
+				"help": "SMS sender ID or virtual number."
+			},
+			{
+				"name": "message",
+				"type": "text",
+				"label": "Fallback Message",
+				"multiline": true
+			}
+		]
+	}
 ]

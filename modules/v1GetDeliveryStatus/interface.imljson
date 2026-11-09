@@ -1,0 +1,49 @@
+[
+	{
+		"name": "message_id",
+		"type": "text",
+		"label": "Message ID"
+	},
+	{
+		"name": "sender_id",
+		"type": "text",
+		"label": "Sender ID"
+	},
+	{
+		"name": "mobile",
+		"type": "text",
+		"label": "Mobile"
+	},
+	{
+		"name": "send_at",
+		"type": "date",
+		"label": "Send At"
+	},
+	{
+		"name": "datetime",
+		"type": "date",
+		"label": "Status Updated At"
+	},
+	{
+		"name": "message",
+		"type": "text",
+		"label": "Message"
+	},
+	{
+		"name": "status",
+		"type": "collection",
+		"label": "Status",
+		"spec": [
+			{
+				"name": "delivered",
+				"type": "text",
+				"label": "Delivered"
+			},
+			{
+				"name": "failed",
+				"type": "text",
+				"label": "Failed"
+			}
+		]
+	}
+]

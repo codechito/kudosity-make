@@ -1,0 +1,70 @@
+[
+	{
+		"name": "id",
+		"type": "text",
+		"label": "Message ID"
+	},
+	{
+		"name": "recipient",
+		"type": "text",
+		"label": "Recipient"
+	},
+	{
+		"name": "sender",
+		"type": "text",
+		"label": "Sender"
+	},
+	{
+		"name": "country",
+		"type": "text",
+		"label": "Country"
+	},
+	{
+		"name": "subject",
+		"type": "text",
+		"label": "Subject"
+	},
+	{
+		"name": "message",
+		"type": "text",
+		"label": "Message"
+	},
+	{
+		"name": "message_ref",
+		"type": "text",
+		"label": "Message Reference"
+	},
+	{
+		"name": "content_urls",
+		"type": "array",
+		"label": "Media URLs",
+		"spec": {
+			"type": "url"
+		}
+	},
+	{
+		"name": "status",
+		"type": "text",
+		"label": "Status"
+	},
+	{
+		"name": "track_links",
+		"type": "boolean",
+		"label": "Track Links"
+	},
+	{
+		"name": "is_sandbox",
+		"type": "boolean",
+		"label": "Sandbox"
+	},
+	{
+		"name": "created_at",
+		"type": "date",
+		"label": "Created At"
+	},
+	{
+		"name": "updated_at",
+		"type": "date",
+		"label": "Updated At"
+	}
+]

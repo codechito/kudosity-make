@@ -14,7 +14,15 @@
 		"msisdn": "{{parameters.msisdn}}"
 	},
 	"response": {
-		"output": "{{body}}",
+		"output": {
+			"message_id": "{{body.message_id}}",
+			"sender_id": "{{body.sender_id}}",
+			"mobile": "{{body.mobile}}",
+			"send_at": "{{parseDate(body.send_at, 'YYYY-MM-DD HH:mm:ss', 'UTC')}}",
+			"datetime": "{{parseDate(body.datetime, 'YYYY-MM-DD HH:mm:ss', 'UTC')}}",
+			"message": "{{body.message}}",
+			"status": "{{body.status}}"
+		},
 		"error": {
 			"message": "{{kudosityError(body, statusCode, 'v1')}}"
 		}

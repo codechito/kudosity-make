@@ -1,0 +1,258 @@
+[
+	{
+		"name": "event_type",
+		"type": "text",
+		"label": "Event Type"
+	},
+	{
+		"name": "timestamp",
+		"type": "date",
+		"label": "Timestamp"
+	},
+	{
+		"name": "webhook_id",
+		"type": "text",
+		"label": "Webhook ID"
+	},
+	{
+		"name": "webhook_name",
+		"type": "text",
+		"label": "Webhook Name"
+	},
+	{
+		"name": "mo",
+		"type": "collection",
+		"label": "Inbound Message",
+		"spec": [
+			{
+				"name": "type",
+				"type": "text",
+				"label": "Type"
+			},
+			{
+				"name": "id",
+				"type": "text",
+				"label": "Message ID"
+			},
+			{
+				"name": "message",
+				"type": "text",
+				"label": "Message"
+			},
+			{
+				"name": "sender",
+				"type": "text",
+				"label": "From"
+			},
+			{
+				"name": "recipient",
+				"type": "text",
+				"label": "To"
+			},
+			{
+				"name": "routed_via",
+				"type": "text",
+				"label": "Routed Via"
+			},
+			{
+				"name": "media",
+				"type": "array",
+				"label": "Media",
+				"spec": [
+					{
+						"name": "name",
+						"type": "text",
+						"label": "Name"
+					},
+					{
+						"name": "url",
+						"type": "url",
+						"label": "URL"
+					}
+				]
+			},
+			{
+				"name": "last_message",
+				"type": "collection",
+				"label": "Last Message Sent",
+				"spec": [
+					{
+						"name": "type",
+						"type": "text",
+						"label": "Type"
+					},
+					{
+						"name": "id",
+						"type": "text",
+						"label": "Message ID"
+					},
+					{
+						"name": "message",
+						"type": "text",
+						"label": "Message"
+					},
+					{
+						"name": "message_ref",
+						"type": "text",
+						"label": "Message Reference"
+					},
+					{
+						"name": "recipient",
+						"type": "text",
+						"label": "Recipient"
+					},
+					{
+						"name": "sender",
+						"type": "text",
+						"label": "Sender"
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "status",
+		"type": "collection",
+		"label": "Status",
+		"spec": [
+			{
+				"name": "id",
+				"type": "text",
+				"label": "Message ID"
+			},
+			{
+				"name": "type",
+				"type": "text",
+				"label": "Type"
+			},
+			{
+				"name": "message_ref",
+				"type": "text",
+				"label": "Message Reference"
+			},
+			{
+				"name": "sender",
+				"type": "text",
+				"label": "Sender"
+			},
+			{
+				"name": "routed_via",
+				"type": "text",
+				"label": "Routed Via"
+			},
+			{
+				"name": "recipient",
+				"type": "text",
+				"label": "Recipient"
+			},
+			{
+				"name": "status",
+				"type": "text",
+				"label": "Status"
+			}
+		]
+	},
+	{
+		"name": "opt_out",
+		"type": "collection",
+		"label": "Opt-out",
+		"spec": [
+			{
+				"name": "source",
+				"type": "text",
+				"label": "Source"
+			},
+			{
+				"name": "source_message",
+				"type": "collection",
+				"label": "Source Message",
+				"spec": [
+					{
+						"name": "type",
+						"type": "text",
+						"label": "Type"
+					},
+					{
+						"name": "id",
+						"type": "text",
+						"label": "Message ID"
+					},
+					{
+						"name": "message",
+						"type": "text",
+						"label": "Message"
+					},
+					{
+						"name": "message_ref",
+						"type": "text",
+						"label": "Message Reference"
+					},
+					{
+						"name": "recipient",
+						"type": "text",
+						"label": "Recipient"
+					},
+					{
+						"name": "sender",
+						"type": "text",
+						"label": "Sender"
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "link_hit",
+		"type": "collection",
+		"label": "Link Hit",
+		"spec": [
+			{
+				"name": "hits",
+				"type": "number",
+				"label": "Hits"
+			},
+			{
+				"name": "url",
+				"type": "url",
+				"label": "URL"
+			},
+			{
+				"name": "source_message",
+				"type": "collection",
+				"label": "Source Message",
+				"spec": [
+					{
+						"name": "type",
+						"type": "text",
+						"label": "Type"
+					},
+					{
+						"name": "id",
+						"type": "text",
+						"label": "Message ID"
+					},
+					{
+						"name": "message",
+						"type": "text",
+						"label": "Message"
+					},
+					{
+						"name": "message_ref",
+						"type": "text",
+						"label": "Message Reference"
+					},
+					{
+						"name": "recipient",
+						"type": "text",
+						"label": "Recipient"
+					},
+					{
+						"name": "sender",
+						"type": "text",
+						"label": "Sender"
+					}
+				]
+			}
+		]
+	}
+]

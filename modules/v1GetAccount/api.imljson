@@ -1,5 +1,5 @@
 {
-	"url": "https://api.transmitsms.com/get-client.json",
+	"url": "https://api.transmitsms.com/get-balance.json",
 	"method": "GET",
 	"headers": {
 		"Authorization": "Basic {{base64(connection.apiKey + ':' + connection.apiSecret)}}",
@@ -10,7 +10,10 @@
 		"X-Kudosity-Action": "account.get"
 	},
 	"response": {
-		"output": "{{body}}",
+		"output": {
+			"balance": "{{body.balance}}",
+			"currency": "{{body.currency}}"
+		},
 		"error": {
 			"message": "{{kudosityError(body, statusCode, 'v1')}}"
 		}

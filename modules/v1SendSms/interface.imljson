@@ -1,0 +1,59 @@
+[
+	{
+		"name": "message_id",
+		"type": "number",
+		"label": "Message ID"
+	},
+	{
+		"name": "send_at",
+		"type": "date",
+		"label": "Send At"
+	},
+	{
+		"name": "recipients",
+		"type": "number",
+		"label": "Recipients"
+	},
+	{
+		"name": "cost",
+		"type": "number",
+		"label": "Cost"
+	},
+	{
+		"name": "sms",
+		"type": "number",
+		"label": "SMS Parts"
+	},
+	{
+		"name": "delivery_stats",
+		"type": "collection",
+		"label": "Delivery Stats",
+		"spec": [
+			{
+				"name": "delivered",
+				"type": "number",
+				"label": "Delivered"
+			},
+			{
+				"name": "pending",
+				"type": "number",
+				"label": "Pending"
+			},
+			{
+				"name": "bounced",
+				"type": "number",
+				"label": "Bounced"
+			},
+			{
+				"name": "responses",
+				"type": "number",
+				"label": "Responses"
+			},
+			{
+				"name": "optouts",
+				"type": "number",
+				"label": "Opt-outs"
+			}
+		]
+	}
+]

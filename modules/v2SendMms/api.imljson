@@ -11,10 +11,11 @@
 	"body": {
 		"sender": "{{parameters.sender}}",
 		"recipient": "{{parameters.recipient}}",
+		"content_urls": "{{parameters.content_urls}}",
 		"subject": "{{parameters.subject}}",
 		"message": "{{parameters.message}}",
-		"media_url": "{{parameters.media_url}}",
-		"message_ref": "{{parameters.message_ref}}"
+		"message_ref": "{{parameters.message_ref}}",
+		"track_links": "{{parameters.track_links}}"
 	},
 	"response": {
 		"output": "{{body}}"

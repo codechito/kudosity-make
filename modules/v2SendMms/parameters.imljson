@@ -1,8 +1,51 @@
 [
-	{ "name": "sender",      "type": "text", "label": "Sender",    "required": true },
-	{ "name": "recipient",   "type": "text", "label": "Recipient", "required": true, "help": "E.164 format, e.g. +61412345678." },
-	{ "name": "media_url",   "type": "url",  "label": "Media URL", "required": true, "help": "Publicly reachable URL of the image or media to attach." },
-	{ "name": "subject",     "type": "text", "label": "Subject" },
-	{ "name": "message",     "type": "text", "label": "Message", "multiline": true },
-	{ "name": "message_ref", "type": "text", "label": "Message Reference" }
+	{
+		"name": "sender",
+		"type": "text",
+		"label": "Sender",
+		"required": true,
+		"help": "Sender ID or virtual number the message is sent from. Use **Get Sender IDs (V1)** to see what this account may send as."
+	},
+	{
+		"name": "recipient",
+		"type": "text",
+		"label": "Recipient",
+		"required": true,
+		"help": "Destination number in international format, e.g. 61412345678."
+	},
+	{
+		"name": "content_urls",
+		"type": "array",
+		"label": "Media URLs",
+		"required": true,
+		"spec": {
+			"type": "url",
+			"label": "Media URL"
+		},
+		"help": "Publicly reachable URLs of the images or media to attach. Kudosity fetches each URL itself."
+	},
+	{
+		"name": "subject",
+		"type": "text",
+		"label": "Subject"
+	},
+	{
+		"name": "message",
+		"type": "text",
+		"label": "Message",
+		"multiline": true
+	},
+	{
+		"name": "message_ref",
+		"type": "text",
+		"label": "Message Reference",
+		"help": "Your own reference, echoed back on status webhooks. Useful for matching a send to its delivery receipt."
+	},
+	{
+		"name": "track_links",
+		"type": "boolean",
+		"label": "Track Links",
+		"default": false,
+		"help": "Shorten links in the message and report clicks as **Link Hit** events (see **Watch Events**)."
+	}
 ]

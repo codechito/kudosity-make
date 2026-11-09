@@ -1,1 +1,26 @@
-[]
+[
+	{
+		"name": "filter",
+		"type": "select",
+		"label": "Numbers",
+		"default": "owned",
+		"options": [
+			{
+				"label": "Leased by this account",
+				"value": "owned"
+			},
+			{
+				"label": "Available to lease",
+				"value": "available"
+			}
+		]
+	},
+	{
+		"name": "limit",
+		"type": "uinteger",
+		"label": "Limit",
+		"default": 10,
+		"required": true,
+		"help": "Maximum number of results to return during one execution cycle."
+	}
+]

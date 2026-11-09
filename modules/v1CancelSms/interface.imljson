@@ -1,0 +1,7 @@
+[
+	{
+		"name": "success",
+		"type": "text",
+		"label": "Result"
+	}
+]

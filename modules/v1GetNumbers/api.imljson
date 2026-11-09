@@ -9,10 +9,27 @@
 		"X-Kudosity-Source-Version": "0.1.0",
 		"X-Kudosity-Action": "numbers.get"
 	},
+	"qs": {
+		"filter": "{{ifempty(parameters.filter, 'owned')}}",
+		"max": 100
+	},
 	"response": {
-		"output": "{{body}}",
+		"output": {
+			"number": "{{item.number}}",
+			"price": "{{item.price}}",
+			"next_charge": "{{parseDate(item.next_charge, 'YYYY-MM-DD', 'UTC')}}",
+			"auto_renew": "{{item.auto_renew}}"
+		},
 		"error": {
 			"message": "{{kudosityError(body, statusCode, 'v1')}}"
-		}
+		},
+		"iterate": "{{body.numbers}}",
+		"limit": "{{parameters.limit}}"
+	},
+	"pagination": {
+		"qs": {
+			"page": "{{pagination.page}}"
+		},
+		"condition": "{{body.page.number < body.page.count}}"
 	}
 }

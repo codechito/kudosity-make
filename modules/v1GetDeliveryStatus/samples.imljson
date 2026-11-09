@@ -1,0 +1,12 @@
+{
+	"message_id": "339683245",
+	"sender_id": "Kudosity",
+	"mobile": "61400000000",
+	"send_at": "2026-11-09T02:42:06.000Z",
+	"datetime": "2026-11-09T02:42:10.000Z",
+	"message": "Your order has shipped.",
+	"status": {
+		"delivered": "1",
+		"failed": "0"
+	}
+}

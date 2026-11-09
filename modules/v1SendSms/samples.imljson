@@ -1,0 +1,14 @@
+{
+	"message_id": 339683245,
+	"send_at": "2026-11-09T02:42:06.000Z",
+	"recipients": 1,
+	"cost": 0.087,
+	"sms": 1,
+	"delivery_stats": {
+		"delivered": 0,
+		"pending": 0,
+		"bounced": 0,
+		"responses": 0,
+		"optouts": 0
+	}
+}

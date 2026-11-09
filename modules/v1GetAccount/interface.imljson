@@ -1,0 +1,12 @@
+[
+	{
+		"name": "balance",
+		"type": "number",
+		"label": "Balance"
+	},
+	{
+		"name": "currency",
+		"type": "text",
+		"label": "Currency"
+	}
+]

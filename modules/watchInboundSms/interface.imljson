@@ -1,0 +1,37 @@
+[
+	{
+		"name": "phone",
+		"type": "text",
+		"label": "From Number"
+	},
+	{
+		"name": "id",
+		"type": "text",
+		"label": "Message ID"
+	},
+	{
+		"name": "message",
+		"type": "text",
+		"label": "Message"
+	},
+	{
+		"name": "status",
+		"type": "text",
+		"label": "Status"
+	},
+	{
+		"name": "to",
+		"type": "text",
+		"label": "To Number"
+	},
+	{
+		"name": "received_at",
+		"type": "text",
+		"label": "Received At"
+	},
+	{
+		"name": "raw",
+		"type": "any",
+		"label": "Raw Payload"
+	}
+]

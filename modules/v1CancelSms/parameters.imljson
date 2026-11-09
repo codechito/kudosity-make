@@ -1,1 +1,9 @@
-[{ "name": "id", "type": "text", "label": "Message ID", "required": true, "help": "The ID returned when the message was sent." }]
+[
+	{
+		"name": "id",
+		"type": "text",
+		"label": "Message ID",
+		"required": true,
+		"help": "The ID returned when the scheduled message was sent."
+	}
+]

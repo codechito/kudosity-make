@@ -1,0 +1,24 @@
+{
+	"url": "{{parameters.url}}",
+	"method": "{{parameters.method}}",
+	"headers": {
+		"x-api-key": "{{connection.apiKey}}",
+		"User-Agent": "kudosity-make/0.1.0",
+		"X-Kudosity-Source": "kudosity-make",
+		"X-Kudosity-Source-Version": "0.1.0",
+		"X-Kudosity-Action": "api.call",
+		"{{...}}": "{{toCollection(parameters.headers, 'key', 'value')}}"
+	},
+	"qs": {
+		"{{...}}": "{{toCollection(parameters.qs, 'key', 'value')}}"
+	},
+	"body": "{{parameters.body}}",
+	"type": "json",
+	"response": {
+		"output": {
+			"body": "{{body}}",
+			"headers": "{{headers}}",
+			"statusCode": "{{statusCode}}"
+		}
+	}
+}

@@ -10,7 +10,11 @@
 		"X-Kudosity-Action": "senderids.get"
 	},
 	"response": {
-		"output": "{{body}}",
+		"output": {
+			"virtual_numbers": "{{get(body.result.caller_ids, 'Virtual Number')}}",
+			"business_names": "{{get(body.result.caller_ids, 'Business Name')}}",
+			"mobile_numbers": "{{get(body.result.caller_ids, 'Mobile Number')}}"
+		},
 		"error": {
 			"message": "{{kudosityError(body, statusCode, 'v1')}}"
 		}

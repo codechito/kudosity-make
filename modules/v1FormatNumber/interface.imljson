@@ -1,0 +1,37 @@
+[
+	{
+		"name": "international",
+		"type": "text",
+		"label": "International Number"
+	},
+	{
+		"name": "countrycode",
+		"type": "number",
+		"label": "Country Calling Code"
+	},
+	{
+		"name": "nationalnumber",
+		"type": "text",
+		"label": "National Number"
+	},
+	{
+		"name": "national_leading_zeroes",
+		"type": "number",
+		"label": "National Leading Zeroes"
+	},
+	{
+		"name": "rawinput",
+		"type": "text",
+		"label": "Raw Input"
+	},
+	{
+		"name": "type",
+		"type": "number",
+		"label": "Number Type"
+	},
+	{
+		"name": "isValid",
+		"type": "boolean",
+		"label": "Valid"
+	}
+]

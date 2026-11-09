@@ -4,6 +4,14 @@
 		"type": "text",
 		"label": "Message ID",
 		"required": true,
-		"help": "Replies to this sent message. The API requires it \u2014 there is no all-recent-replies call."
+		"help": "Replies to this sent message. Use the ID returned when the message was sent."
+	},
+	{
+		"name": "limit",
+		"type": "uinteger",
+		"label": "Limit",
+		"default": 10,
+		"required": true,
+		"help": "Maximum number of results to return during one execution cycle."
 	}
 ]

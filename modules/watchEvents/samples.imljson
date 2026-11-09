@@ -1,0 +1,22 @@
+{
+	"event_type": "SMS_INBOUND",
+	"timestamp": "2026-11-09T05:16:33.345Z",
+	"webhook_id": "fd0e6485-b905-44c1-bd55-fee1d0d6d864",
+	"webhook_name": "Make",
+	"mo": {
+		"type": "SMS",
+		"id": "alss-2way-605b31c7-d2c49104",
+		"message": "Yes, please",
+		"recipient": "61400000001",
+		"routed_via": "61400000001",
+		"sender": "61400000000",
+		"last_message": {
+			"type": "SMS",
+			"id": "a51ebe4e-a412-440e-a8d9-464e68a521cc",
+			"message": "Reply YES to confirm.",
+			"message_ref": "order-1001",
+			"recipient": "61400000000",
+			"sender": "61400000001"
+		}
+	}
+}

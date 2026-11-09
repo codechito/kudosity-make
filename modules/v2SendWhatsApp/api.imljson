@@ -1,20 +1,58 @@
-{
-	"url": "/whatsapp/messages",
-	"method": "POST",
-	"headers": {
-		"x-api-key": "{{connection.apiKey}}",
-		"User-Agent": "kudosity-make/0.1.0",
-		"X-Kudosity-Source": "kudosity-make",
-		"X-Kudosity-Source-Version": "0.1.0",
-		"X-Kudosity-Action": "whatsapp.send"
+[
+	{
+		"condition": "{{parameters.content_type = 'text'}}",
+		"url": "/whatsapp/messages",
+		"method": "POST",
+		"headers": {
+			"x-api-key": "{{connection.apiKey}}",
+			"User-Agent": "kudosity-make/0.1.0",
+			"X-Kudosity-Source": "kudosity-make",
+			"X-Kudosity-Source-Version": "0.1.0",
+			"X-Kudosity-Action": "whatsapp.send"
+		},
+		"body": {
+			"sender": "{{parameters.sender}}",
+			"recipient": "{{parameters.recipient}}",
+			"content_type": "text",
+			"content": {
+				"text": {
+					"message": "{{parameters.message}}"
+				}
+			},
+			"message_ref": "{{parameters.message_ref}}",
+			"sms_fallback": "{{parameters.sms_fallback}}"
+		},
+		"response": {
+			"output": "{{body.data}}"
+		}
 	},
-	"body": {
-		"sender": "{{parameters.sender}}",
-		"recipient": "{{parameters.recipient}}",
-		"message": "{{parameters.message}}",
-		"message_ref": "{{parameters.message_ref}}"
-	},
-	"response": {
-		"output": "{{body}}"
+	{
+		"condition": "{{parameters.content_type = 'template'}}",
+		"url": "/whatsapp/messages",
+		"method": "POST",
+		"headers": {
+			"x-api-key": "{{connection.apiKey}}",
+			"User-Agent": "kudosity-make/0.1.0",
+			"X-Kudosity-Source": "kudosity-make",
+			"X-Kudosity-Source-Version": "0.1.0",
+			"X-Kudosity-Action": "whatsapp.send"
+		},
+		"body": {
+			"sender": "{{parameters.sender}}",
+			"recipient": "{{parameters.recipient}}",
+			"content_type": "template",
+			"content": {
+				"template": {
+					"name": "{{parameters.template_name}}",
+					"locale": "{{ifempty(parameters.template_locale, 'en')}}",
+					"parameters": "{{parameters.template_parameters}}"
+				}
+			},
+			"message_ref": "{{parameters.message_ref}}",
+			"sms_fallback": "{{parameters.sms_fallback}}"
+		},
+		"response": {
+			"output": "{{body.data}}"
+		}
 	}
-}
+]

@@ -12,8 +12,11 @@
 	"body": {
 		"id": "{{parameters.id}}"
 	},
+	"type": "urlencoded",
 	"response": {
-		"output": "{{body}}",
+		"output": {
+			"success": "{{body.success}}"
+		},
 		"error": {
 			"message": "{{kudosityError(body, statusCode, 'v1')}}"
 		}

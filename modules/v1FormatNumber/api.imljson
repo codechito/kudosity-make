@@ -14,7 +14,7 @@
 		"countrycode": "{{parameters.countrycode}}"
 	},
 	"response": {
-		"output": "{{body}}",
+		"output": "{{body.number}}",
 		"error": {
 			"message": "{{kudosityError(body, statusCode, 'v1')}}"
 		}

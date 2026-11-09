@@ -1,0 +1,85 @@
+[
+	{
+		"name": "id",
+		"type": "text",
+		"label": "Message ID"
+	},
+	{
+		"name": "message_ref",
+		"type": "text",
+		"label": "Message Reference"
+	},
+	{
+		"name": "sender",
+		"type": "text",
+		"label": "Sender"
+	},
+	{
+		"name": "recipient",
+		"type": "text",
+		"label": "Recipient"
+	},
+	{
+		"name": "recipient_country",
+		"type": "text",
+		"label": "Recipient Country"
+	},
+	{
+		"name": "content_type",
+		"type": "text",
+		"label": "Content Type"
+	},
+	{
+		"name": "content",
+		"type": "collection",
+		"label": "Content",
+		"spec": [
+			{
+				"name": "text",
+				"type": "collection",
+				"label": "Text",
+				"spec": [
+					{
+						"name": "message",
+						"type": "text",
+						"label": "Message"
+					}
+				]
+			},
+			{
+				"name": "media",
+				"type": "collection",
+				"label": "Media",
+				"spec": [
+					{
+						"name": "file_url",
+						"type": "url",
+						"label": "File URL"
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "sms_fallback",
+		"type": "collection",
+		"label": "SMS Fallback",
+		"spec": [
+			{
+				"name": "sender",
+				"type": "text",
+				"label": "Sender"
+			},
+			{
+				"name": "message",
+				"type": "text",
+				"label": "Message"
+			}
+		]
+	},
+	{
+		"name": "created_at",
+		"type": "date",
+		"label": "Created At"
+	}
+]

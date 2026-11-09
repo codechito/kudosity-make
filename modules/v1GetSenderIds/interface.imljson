@@ -1,0 +1,26 @@
+[
+	{
+		"name": "virtual_numbers",
+		"type": "array",
+		"label": "Virtual Numbers",
+		"spec": {
+			"type": "text"
+		}
+	},
+	{
+		"name": "business_names",
+		"type": "array",
+		"label": "Business Names",
+		"spec": {
+			"type": "text"
+		}
+	},
+	{
+		"name": "mobile_numbers",
+		"type": "array",
+		"label": "Mobile Numbers",
+		"spec": {
+			"type": "text"
+		}
+	}
+]

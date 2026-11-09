@@ -16,13 +16,21 @@
 		"countrycode": "{{parameters.countrycode}}",
 		"tracked_link_url": "{{parameters.tracked_link_url}}",
 		"validity": "{{parameters.validity}}",
-		"send_at": "{{parameters.send_at}}",
+		"send_at": "{{if(parameters.send_at, formatDate(parameters.send_at, 'YYYY-MM-DD HH:mm:ss', 'UTC'), '')}}",
 		"dlr_callback": "{{parameters.dlr_callback}}",
 		"reply_callback": "{{parameters.reply_callback}}",
 		"link_hits_callback": "{{parameters.link_hits_callback}}"
 	},
+	"type": "urlencoded",
 	"response": {
-		"output": "{{body}}",
+		"output": {
+			"message_id": "{{body.message_id}}",
+			"send_at": "{{parseDate(body.send_at, 'YYYY-MM-DD HH:mm:ss', 'UTC')}}",
+			"recipients": "{{body.recipients}}",
+			"cost": "{{body.cost}}",
+			"sms": "{{body.sms}}",
+			"delivery_stats": "{{body.delivery_stats}}"
+		},
 		"error": {
 			"message": "{{kudosityError(body, statusCode, 'v1')}}"
 		}
