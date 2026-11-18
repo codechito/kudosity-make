@@ -7,7 +7,12 @@
 	{
 		"name": "id",
 		"type": "text",
-		"label": "Message ID"
+		"label": "Original Message ID"
+	},
+	{
+		"name": "response_id",
+		"type": "text",
+		"label": "Reply ID"
 	},
 	{
 		"name": "message",
@@ -17,7 +22,12 @@
 	{
 		"name": "status",
 		"type": "text",
-		"label": "Status"
+		"label": "Status (received or opt-out)"
+	},
+	{
+		"name": "opt_out",
+		"type": "boolean",
+		"label": "Opted Out"
 	},
 	{
 		"name": "to",

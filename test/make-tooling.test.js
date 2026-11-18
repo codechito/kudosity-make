@@ -266,6 +266,18 @@ describe('smoke test', () => {
         }
     });
 
+    test('V1 inbound reads the query string Kudosity actually sends', () => {
+        // Kudosity forwards inbound SMS as a GET with everything in the query string and an
+        // empty body (seen in Make's hook log, 18 Nov 2026). Reading only the body gave a
+        // bundle of nulls, so every field must look at query first.
+        const api = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'webhooks', 'v1Inbound', 'api.imljson'), 'utf8')).output;
+        for (const [field, param] of Object.entries({ phone: 'mobile', id: 'message_id', response_id: 'response_id', message: 'response', to: 'longcode', received_at: 'datetime_entry' })) {
+            assert.match(api[field], new RegExp(`ifempty\\(query\\.${param}\\b`), `${field} must read query.${param} first`);
+        }
+        const iface = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'modules', 'watchInboundSms', 'interface.imljson'), 'utf8')).map((x) => x.name);
+        for (const field of Object.keys(api).filter((k) => k !== 'raw')) assert.ok(iface.includes(field), `${field} is mapped but not in the interface`);
+    });
+
     test('env file parsing', () => {
         const f = path.join(os.tmpdir(), `kmt-${process.pid}.env`);
         fs.writeFileSync(f, '# c\nKUDOSITY_TEST_SENDER="Kudosity"\n\nKUDOSITY_TEST_RECIPIENT = +61400000000\n');

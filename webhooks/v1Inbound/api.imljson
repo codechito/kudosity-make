@@ -1,12 +1,14 @@
 {
 	"output": {
-		"phone":       "{{ifempty(body.mobile, body.msisdn, body.from)}}",
-		"id":          "{{ifempty(body.message_id, body.id)}}",
-		"message":     "{{ifempty(body.response, body.message)}}",
-		"status":      "{{body.status}}",
-		"to":          "{{ifempty(body.to, body.longcode)}}",
-		"received_at": "{{ifempty(body.datetime, body.received_at)}}",
-		"raw":         "{{body}}"
+		"phone":       "{{ifempty(query.mobile, body.mobile, body.msisdn, body.from)}}",
+		"id":          "{{ifempty(query.message_id, body.message_id, body.id)}}",
+		"response_id": "{{ifempty(query.response_id, body.response_id)}}",
+		"message":     "{{ifempty(query.response, body.response, body.message)}}",
+		"status":      "{{if(ifempty(query.is_optout, body.is_optout) = 'yes', 'opt-out', 'received')}}",
+		"opt_out":     "{{ifempty(query.is_optout, body.is_optout) = 'yes'}}",
+		"to":          "{{ifempty(query.longcode, body.longcode, body.to)}}",
+		"received_at": "{{ifempty(query.datetime_entry, body.datetime_entry, body.datetime, body.received_at)}}",
+		"raw":         "{{ifempty(query, body)}}"
 	},
 	"respond": {
 		"status": 200
