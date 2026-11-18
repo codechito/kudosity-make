@@ -34,11 +34,26 @@ const LEARNED_FILE = path.join(ROOT, '.make', 'learned.json');
 const STATUS = { 1: 'success', 2: 'warning', 3: 'error' };
 
 /** Cases. `send: true` costs money and messages a real phone, so it only runs with --send. */
+/**
+ * Names of the modules the app actually publishes (make-app.json "modules"). Cases and review
+ * scenarios for parked modules (make-app.json "parkedModules", e.g. RCS until a sender is
+ * provisioned) are skipped, so parking or restoring a module is a one-line manifest change.
+ */
+function publishedModuleNames() {
+    return new Set(JSON.parse(fs.readFileSync(path.join(ROOT, 'make-app.json'), 'utf8')).modules.map((m) => m.name));
+}
+
+function onlyPublished(list) {
+    const names = publishedModuleNames();
+    const ok = (m) => !m || names.has(m);
+    return list.filter((c) => ok(c.module) && ok(c.trigger) && (c.steps || []).every((s) => ok(s.module)));
+}
+
 function cases(env = {}) {
     const to = env.KUDOSITY_TEST_RECIPIENT;
     const from = env.KUDOSITY_TEST_SENDER;
     const inOneDay = new Date(Date.now() + 24 * 3600 * 1000).toISOString();
-    return [
+    return onlyPublished([
         { module: 'v1GetAccount', mapper: {} },
         { module: 'v1GetSenderIds', mapper: {} },
         { module: 'v1GetNumbers', mapper: { filter: 'owned', limit: 5 } },
@@ -58,7 +73,7 @@ function cases(env = {}) {
             content_urls: ['https://www.gstatic.com/webp/gallery/1.jpg'], message_ref: 'make-test' } },
         { module: 'v2SendWhatsApp', send: true, mapper: { recipient: to, sender: from, content_type: 'text', message: 'Kudosity Make test (WhatsApp)', message_ref: 'make-test' } },
         { module: 'v2SendRcs', send: true, mapper: { recipient: to, sender: from, content_type: 'text', message: 'Kudosity Make test (RCS)', message_ref: 'make-test' } },
-    ];
+    ]);
 }
 
 function loadManifest() {
@@ -219,4 +234,4 @@ if (require.main === module) {
     main().catch((e) => { console.error(e.message); process.exit(1); });
 }
 
-module.exports = { cases, learnFromBlueprint, buildBlueprint, buildFlow, runCase, loadEnvFile };
+module.exports = { onlyPublished, publishedModuleNames, cases, learnFromBlueprint, buildBlueprint, buildFlow, runCase, loadEnvFile };

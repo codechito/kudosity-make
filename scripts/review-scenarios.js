@@ -18,7 +18,7 @@
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const { buildFlow, loadEnvFile } = require('./smoke-test');
+const { buildFlow, loadEnvFile, onlyPublished } = require('./smoke-test');
 
 const ROOT = path.join(__dirname, '..');
 const IDS_FILE = path.join(ROOT, '.make', 'review-scenarios.json');
@@ -29,7 +29,8 @@ function scenarios(env) {
     const to = env.KUDOSITY_TEST_RECIPIENT;
     const from = env.KUDOSITY_TEST_SENDER;
     const tomorrow = new Date(Date.now() + 24 * 3600 * 1000).toISOString();
-    return [
+    // Parked modules (make-app.json "parkedModules") get no review scenario.
+    return onlyPublished([
         { name: 'Send an SMS', steps: [{ module: 'v2SendSms', mapper: { sender: from, recipient: to, message: 'Your order #1001 has shipped. Reply STOP to opt out.', message_ref: 'review-sms', track_links: false } }] },
         { name: 'Send an MMS', steps: [{ module: 'v2SendMms', mapper: { sender: from, recipient: to, subject: 'Order #1001', message: 'Here is a photo of your order.', content_urls: [MMS_IMAGE], message_ref: 'review-mms' } }] },
         { name: 'Send a WhatsApp Message', steps: [{ module: 'v2SendWhatsApp', mapper: { sender: from, recipient: to, content_type: 'text', message: 'Your order #1001 has shipped.', message_ref: 'review-whatsapp' } }], needs: 'a WhatsApp-enabled sender' },
@@ -52,7 +53,7 @@ function scenarios(env) {
         // forward URL, which is why it is never done automatically).
         { name: 'Watch Events', trigger: 'watchEvents', hookKey: 'v2Hook' },
         { name: 'V1 Watch Inbound SMS', trigger: 'watchInboundSms', hookKey: 'v1Hook', needs: 'a webhook on a virtual number (add it in the trigger)' },
-    ];
+    ]);
 }
 
 /** Pure: a scenario holding one instant trigger, optionally bound to a Make webhook. */

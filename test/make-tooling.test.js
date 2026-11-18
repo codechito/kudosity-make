@@ -250,8 +250,20 @@ describe('smoke test', () => {
 
     test('sending cases are marked so they only run with --send', () => {
         const sends = cases({}).filter((c) => c.send).map((c) => c.name || c.module);
-        assert.deepStrictEqual(sends.sort(), ['v1ScheduleThenCancel', 'v1SmsLifecycle', 'v2SendMms', 'v2SendRcs', 'v2SendSms', 'v2SendWhatsApp']);
+        // WhatsApp and RCS are parked (make-app.json parkedModules) until a sender is provisioned.
+        assert.deepStrictEqual(sends.sort(), ['v1ScheduleThenCancel', 'v1SmsLifecycle', 'v2SendMms', 'v2SendSms']);
         for (const c of cases({}).filter((x) => !x.send)) assert.ok(!c.steps, `${c.module} is read-only and single-step`);
+    });
+
+    test('parked modules are not deployed and get no smoke case or review scenario', () => {
+        const { scenarios } = require('../scripts/review-scenarios');
+        const published = new Set(manifest.modules.map((m) => m.name));
+        for (const parked of manifest.parkedModules || []) {
+            assert.ok(!published.has(parked.name), `${parked.name} is both published and parked`);
+            assert.ok(!buildPlan(manifest).some((st) => st.name === parked.name), `${parked.name} would be deployed`);
+            assert.ok(!cases({}).some((c) => c.module === parked.name), `${parked.name} still has a smoke case`);
+            assert.ok(!scenarios({}).some((sc) => (sc.steps || []).some((st) => st.module === parked.name)), `${parked.name} still has a review scenario`);
+        }
     });
 
     test('env file parsing', () => {

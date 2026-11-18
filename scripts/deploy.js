@@ -88,7 +88,8 @@ function buildPlan(manifest = loadManifest()) {
             typeId: TYPE_IDS[m.type], connection: m.connection, webhook: m.webhook || null, sections });
     }
     // Every module folder on disk must be in the manifest, so nothing is silently left out.
-    const declared = new Set(manifest.modules.map((m) => m.name));
+    // Parked modules (manifest.parkedModules) count as declared but are deliberately not deployed.
+    const declared = new Set([...manifest.modules, ...(manifest.parkedModules || [])].map((m) => m.name));
     for (const dir of fs.readdirSync(path.join(ROOT, 'modules'))) {
         if (!declared.has(dir)) missing.push(`modules/${dir} is not in make-app.json`);
     }

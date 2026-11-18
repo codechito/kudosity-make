@@ -9,7 +9,7 @@ authentication scheme.
 | Credentials | API key **and** secret | API key only |
 | Header | `Authorization: Basic base64(key:secret)` | `x-api-key: <key>` |
 | Encoding | Form-encoded | JSON |
-| Channels | SMS | SMS, MMS, WhatsApp, RCS |
+| Channels | SMS | SMS, MMS (WhatsApp and RCS coming later) |
 
 Pick the connection that matches the modules you are using. A V2 key will not
 authenticate a V1 module and the reverse is equally true — these are different

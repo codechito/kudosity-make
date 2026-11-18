@@ -1,6 +1,6 @@
 # Kudosity
 
-The Kudosity modules let you send SMS, MMS, WhatsApp and RCS messages, and start scenarios
+The Kudosity modules let you send SMS and MMS messages, and start scenarios
 when a message arrives, a delivery receipt comes back, a recipient opts out, or someone
 clicks a tracked link.
 
@@ -43,8 +43,6 @@ it from the dropdown.
 |---|---|
 | **Send an SMS** | Sends a text message |
 | **Send an MMS** | Sends a message with an image or other media attached |
-| **Send a WhatsApp Message** | Sends a WhatsApp message |
-| **Send an RCS Message** | Sends a rich RCS message |
 
 ### Triggers
 
@@ -66,8 +64,8 @@ Every send module shares these:
 
 ## Channel availability
 
-SMS works on any Kudosity account. MMS, WhatsApp and RCS each need that channel provisioned
-and an approved sender. If a send fails with a sender or channel error, the channel is not
+SMS works on any Kudosity account. MMS needs the channel provisioned and an approved sender.
+WhatsApp and RCS modules are coming in a later version of this app. If a send fails with a sender or channel error, the channel is not
 enabled on your account — that is an account setting, not a scenario problem.
 
 ## Costs

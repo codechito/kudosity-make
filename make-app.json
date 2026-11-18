@@ -4,7 +4,7 @@
     "name": "kudosity-messaging-3l8g1e",
     "version": 1,
     "label": "Kudosity",
-    "description": "Kudosity is a business platform that helps organisations send SMS, MMS, WhatsApp and RCS messages. Our workflow automation enables businesses to send order updates from e-commerce platforms, automate lead nurture programs, and improve customer engagement.",
+    "description": "Kudosity is a business platform that helps organisations send SMS and MMS messages. Our workflow automation enables businesses to send order updates from e-commerce platforms, automate lead nurture programs, and improve customer engagement.",
     "theme": "#4C23CC",
     "icon": "assets/icon.png",
     "language": "en",
@@ -48,8 +48,6 @@
   "modules": [
     { "name": "v2SendSms", "label": "Send an SMS", "description": "Sends an SMS through the Kudosity V2 API.", "type": "action", "connection": "v2" },
     { "name": "v2SendMms", "label": "Send an MMS", "description": "Sends an MMS with one or more media attachments.", "type": "action", "connection": "v2" },
-    { "name": "v2SendWhatsApp", "label": "Send a WhatsApp Message", "description": "Sends a WhatsApp text or approved template message, with optional SMS fallback.", "type": "action", "connection": "v2" },
-    { "name": "v2SendRcs", "label": "Send an RCS Message", "description": "Sends an RCS text or media message, with optional SMS fallback.", "type": "action", "connection": "v2" },
     { "name": "v2MakeApiCall", "label": "Make an API Call", "description": "Performs an arbitrary authorized call to the Kudosity V2 API.", "type": "universal", "connection": "v2" },
     { "name": "v1SendSms", "label": "Send an SMS (V1)", "description": "Sends an SMS through the Kudosity V1 API.", "type": "action", "connection": "v1" },
     { "name": "v1CancelSms", "label": "Cancel a Scheduled SMS (V1)", "description": "Cancels a scheduled SMS.", "type": "action", "connection": "v1" },
@@ -62,5 +60,10 @@
     { "name": "v1MakeApiCall", "label": "Make an API Call (V1)", "description": "Performs an arbitrary authorized call to the Kudosity V1 API.", "type": "universal", "connection": "v1" },
     { "name": "watchEvents", "label": "Watch Events", "description": "Triggers on Kudosity V2 events such as inbound SMS, delivery status and opt-outs.", "type": "instant", "connection": "v2", "webhook": "v2Events" },
     { "name": "watchInboundSms", "label": "Watch Inbound SMS (V1)", "description": "Triggers when a virtual number receives an SMS.", "type": "instant", "connection": "v1", "webhook": "v1Inbound" }
-  ]
+  ],
+    "$parkedComment": "Modules kept in the repo but not deployed, so the first Make review only covers channels the test account can run. WhatsApp needs a WhatsApp-enabled sender and RCS an RCS agent sender; the test account has neither yet (SAL-103). To publish one later, move its entry back into modules and deploy; Make reviews the update.",
+    "parkedModules": [
+    { "name": "v2SendWhatsApp", "label": "Send a WhatsApp Message", "description": "Sends a WhatsApp text or approved template message, with optional SMS fallback.", "type": "action", "connection": "v2" },
+    { "name": "v2SendRcs", "label": "Send an RCS Message", "description": "Sends an RCS text or media message, with optional SMS fallback.", "type": "action", "connection": "v2" }
+    ]
 }

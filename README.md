@@ -1,7 +1,7 @@
 # Kudosity custom app for Make
 
-A [Make](https://www.make.com) custom app for the Kudosity messaging API — send SMS, MMS,
-WhatsApp and RCS messages, and start scenarios from inbound messages, delivery receipts,
+A [Make](https://www.make.com) custom app for the Kudosity messaging API — send SMS and MMS
+messages, and start scenarios from inbound messages, delivery receipts,
 opt-outs and link hits.
 
 Sibling integrations: [`kudosity-n8n`](https://github.com/codechito/kudosity-n8n),
@@ -23,7 +23,7 @@ The app covers **both Kudosity APIs**, with a connection for each:
 |---|---|---|
 | Host | `api.transmitsms.com` | `api.transmitmessage.com/v2` |
 | Auth | Basic `key:secret` | `x-api-key: <key>` |
-| Channels | SMS | SMS, MMS, WhatsApp, RCS |
+| Channels | SMS | SMS, MMS (WhatsApp and RCS parked, see below) |
 | Inbound | A number's single forward URL | A subscription per event type |
 
 V1 is the API the Kudosity Salesforce and Eloqua integrations use; its endpoints and
@@ -42,8 +42,8 @@ for which one applies to a given account.
 |---|---|---|
 | Send SMS | `POST` | `/sms` |
 | Send MMS | `POST` | `/mms` |
-| Send WhatsApp | `POST` | `/whatsapp/messages` |
-| Send RCS | `POST` | `/rcs/messages` |
+| Send WhatsApp (parked) | `POST` | `/whatsapp/messages` |
+| Send RCS (parked) | `POST` | `/rcs/messages` |
 | Webhook trigger | `POST` / `DELETE` | `/webhook`, `/webhook/{id}` |
 
 ---
@@ -78,7 +78,7 @@ Best if you want the app to stay in sync with this repo.
    |---|---|
    | Name | `kudosity` |
    | Label | `Kudosity` |
-   | Description | `Send SMS, MMS, WhatsApp and RCS messages via Kudosity` |
+   | Description | `Send SMS and MMS messages via Kudosity` |
    | Theme | `#00A4E4` (or your brand colour) |
    | Language | `en` |
    | Countries | leave blank for global |
@@ -144,8 +144,8 @@ Run each module once, against your own mobile number, before letting anyone buil
 2. Right-click the module and choose **Run this module only**.
 3. Check the output bundle and confirm the message actually arrives.
 
-Repeat for MMS (needs a publicly reachable **Media URL**), WhatsApp and RCS. Those three
-require the relevant channel to be provisioned on your Kudosity account — if a send fails
+Repeat for MMS (needs a publicly reachable **Media URL**). MMS (and WhatsApp and RCS, once
+unparked) require the relevant channel to be provisioned on your Kudosity account — if a send fails
 with a sender or channel error, that is an account provisioning issue, not the app.
 
 ## Add the documentation
@@ -264,8 +264,14 @@ Channel-specific extras:
 
 - **Send MMS** also takes **Media URL** (required, must be publicly reachable) and an
   optional **Subject**.
-- **Send WhatsApp** needs a WhatsApp-enabled sender.
-- **Send RCS** needs an RCS agent registered with Kudosity.
+- **Send WhatsApp** (parked) needs a WhatsApp-enabled sender.
+- **Send RCS** (parked) needs an RCS agent registered with Kudosity.
+
+**Parked modules.** WhatsApp and RCS are built and tested in code but listed under
+`parkedModules` in `make-app.json`, so they are not deployed and get no smoke case or review
+scenario: the test account has no WhatsApp or RCS sender, and Make's review needs a successful
+run of every published module. To publish one, move its entry back into `modules`, deploy, and
+add its review scenario run; Make reviews the update (SAL-103).
 
 ### Message Reference is the one to actually use
 
