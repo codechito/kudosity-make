@@ -13,6 +13,7 @@
  *   v2 auth       {"status":"Unauthorized"} / {"status":"Invalid api key"}
  *   v2 simple     {"error":"sender: required"}             <- error is a string
  *   v2 rich       {"error":{"detail":"...","issues":[{"name":"sender","message":"..."}]}}
+ *   v2 sender     {"error":"Sender not found"}                <- seen 20 Nov 2026, unregistered sender
  *
  * @param {*} body        the parsed response body, or a string when it is not JSON
  * @param {number} status the HTTP status code
@@ -60,7 +61,7 @@ function kudosityError(body, status, api) {
         advice = api === 'v1'
             ? 'The V1 connection needs BOTH the API key and its secret — it authenticates with HTTP Basic over key:secret. Both are under Settings > API in your Kudosity account. A key on its own will not work here.'
             : 'The V2 connection needs only the API key, sent as the x-api-key header. It is under Settings > API in your Kudosity account. The V1 secret is not used by V2.';
-    } else if (fields.indexOf('sender') >= 0 || t.indexOf('invalid sender') >= 0) {
+    } else if (fields.indexOf('sender') >= 0 || t.indexOf('invalid sender') >= 0 || t.indexOf('sender not found') >= 0) {
         advice = 'The sender is not valid for this channel. Pick one from the Sender list in the module, which shows the senders registered on this account. A virtual number that works for SMS is often not provisioned for WhatsApp or RCS — that needs enabling on the account.';
     } else if (t.indexOf('sender: required') >= 0) {
         advice = 'The V2 API requires a sender and will not fall back to an account default — unlike V1, where leaving From blank is allowed. Pick one from the Sender list in the module.';

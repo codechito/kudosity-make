@@ -28,6 +28,7 @@ const CASES = [
     ['v2 auth',        { status: 'Invalid api key' }, 401, 'v2', /x-api-key/],
     ['v2 no sender',   { error: 'sender: required' }, 400, 'v2', /will not fall back to an account default/],
     ['v2 bad sender',  { error: { detail: 'Request validation failed', issues: [{ name: 'sender', message: 'invalid sender number' }] } }, 400, 'v2', /not provisioned for WhatsApp or RCS/],
+    ['v2 sender not found', { error: 'Sender not found' }, 400, 'v2', /Sender list/],
     ['v2 content_url', { error: 'Invalid content_url: https://x.test/a.png Content-Type: text/plain not supported' }, 400, 'v2', /fetches this URL itself/],
     ['v1 msisdn',      { error: { code: 'FIELD_EMPTY', description: 'Field msisdn is required' } }, 400, 'v1', /Recipient Number/],
     ['v1 message_id',  { error: { code: 'FIELD_INVALID', description: "You must provide 'message_id' or 'keyword_id', or both 'keyword' and 'number'" } }, 400, 'v1', /no all-recent-replies call/],

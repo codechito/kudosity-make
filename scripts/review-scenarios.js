@@ -35,6 +35,9 @@ function scenarios(env) {
         { name: 'Send an MMS', steps: [{ module: 'v2SendMms', mapper: { sender: from, recipient: to, subject: 'Order #1001', message: 'Here is a photo of your order.', content_urls: [MMS_IMAGE], message_ref: 'review-mms' } }] },
         { name: 'Send a WhatsApp Message', steps: [{ module: 'v2SendWhatsApp', mapper: { sender: from, recipient: to, content_type: 'text', message: 'Your order #1001 has shipped.', message_ref: 'review-whatsapp' } }], needs: 'a WhatsApp-enabled sender' },
         { name: 'Send an RCS Message', steps: [{ module: 'v2SendRcs', mapper: { sender: from, recipient: to, content_type: 'text', message: 'Your order #1001 has shipped.', message_ref: 'review-rcs' } }], needs: 'an RCS agent sender' },
+        // Make asks for one scenario with an API error, to see how service errors are presented. A sender the
+        // account does not own is rejected by Kudosity with 400, so nothing is sent; the run must end in error.
+        { name: 'API Error - Send an SMS from an unregistered sender', expectError: true, steps: [{ module: 'v2SendSms', mapper: { sender: '61400000000', recipient: to, message: 'This send is rejected on purpose to show error handling.', message_ref: 'review-error', track_links: false } }] },
         { name: 'Make an API Call', steps: [{ module: 'v2MakeApiCall', mapper: { url: '/sms', method: 'GET', qs: [{ key: 'limit', value: '1' }] } }] },
         { name: 'V1 Send SMS, Get Delivery Status, List Replies', steps: [
             { module: 'v1SendSms', mapper: { to, from, message: 'Your appointment is tomorrow at 10am. Reply YES to confirm.' } },
@@ -134,7 +137,8 @@ async function main() {
         }
         if (s.needs && row.result !== 'success') row.result += ` (needs ${s.needs})`;
         rows.push(row);
-        console.log(`${row.result.startsWith('success') ? 'OK  ' : 'FAIL'} ${s.name}\n     ${row.url}\n     ${row.result}`);
+        const ok = s.expectError ? row.result.startsWith('error') : row.result.startsWith('success');
+        console.log(`${ok ? 'OK  ' : 'FAIL'} ${s.name}\n     ${row.url}\n     ${row.result}`);
     }
     return rows;
 }
