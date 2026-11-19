@@ -4,7 +4,6 @@
 		"url": "/rcs/messages",
 		"method": "POST",
 		"headers": {
-			"x-api-key": "{{connection.apiKey}}",
 			"User-Agent": "kudosity-make/0.1.0",
 			"X-Kudosity-Source": "kudosity-make",
 			"X-Kudosity-Source-Version": "0.1.0",
@@ -23,7 +22,17 @@
 			"sms_fallback": "{{parameters.sms_fallback}}"
 		},
 		"response": {
-			"output": "{{body.data}}"
+			"output": {
+				"id": "{{body.id}}",
+				"message_ref": "{{body.message_ref}}",
+				"sender": "{{body.sender}}",
+				"recipient": "{{body.recipient}}",
+				"recipient_country": "{{body.recipient_country}}",
+				"content_type": "{{body.content_type}}",
+				"content": "{{body.content}}",
+				"sms_fallback": "{{body.sms_fallback}}",
+				"created_at": "{{parseDate(body.created_at)}}"
+			}
 		}
 	},
 	{
@@ -31,7 +40,6 @@
 		"url": "/rcs/messages",
 		"method": "POST",
 		"headers": {
-			"x-api-key": "{{connection.apiKey}}",
 			"User-Agent": "kudosity-make/0.1.0",
 			"X-Kudosity-Source": "kudosity-make",
 			"X-Kudosity-Source-Version": "0.1.0",
@@ -50,7 +58,17 @@
 			"sms_fallback": "{{parameters.sms_fallback}}"
 		},
 		"response": {
-			"output": "{{body.data}}"
+			"output": {
+				"id": "{{body.id}}",
+				"message_ref": "{{body.message_ref}}",
+				"sender": "{{body.sender}}",
+				"recipient": "{{body.recipient}}",
+				"recipient_country": "{{body.recipient_country}}",
+				"content_type": "{{body.content_type}}",
+				"content": "{{body.content}}",
+				"sms_fallback": "{{body.sms_fallback}}",
+				"created_at": "{{parseDate(body.created_at)}}"
+			}
 		}
 	}
 ]

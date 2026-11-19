@@ -2,7 +2,7 @@
 	{
 		"name": "virtual_numbers",
 		"type": "array",
-		"label": "Virtual Numbers",
+		"label": "Virtual numbers",
 		"spec": {
 			"type": "text"
 		}
@@ -10,7 +10,7 @@
 	{
 		"name": "business_names",
 		"type": "array",
-		"label": "Business Names",
+		"label": "Business names",
 		"spec": {
 			"type": "text"
 		}
@@ -18,7 +18,7 @@
 	{
 		"name": "mobile_numbers",
 		"type": "array",
-		"label": "Mobile Numbers",
+		"label": "Mobile numbers",
 		"spec": {
 			"type": "text"
 		}

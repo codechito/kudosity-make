@@ -106,6 +106,7 @@ describe('deploy', () => {
                 if (method === 'GET' && p === '/sdk/apps') return { apps: [{ name: APP, version: 1 }] };
                 if (method === 'GET' && p.endsWith('/functions')) return [{ name: 'kudosityError' }];
                 if (method === 'GET' && p.endsWith('/modules')) return manifest.modules.map((m) => ({ name: m.name }));
+                if (method === 'GET' && p.endsWith('/rpcs')) return { appRpcs: (manifest.rpcs || []).map((r) => ({ name: r.name })) };
                 return {};
             });
             await apply(client, manifest, buildPlan(manifest), () => {});
@@ -276,6 +277,22 @@ describe('smoke test', () => {
         }
         const iface = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'modules', 'watchInboundSms', 'interface.imljson'), 'utf8')).map((x) => x.name);
         for (const field of Object.keys(api).filter((k) => k !== 'raw')) assert.ok(iface.includes(field), `${field} is mapped but not in the interface`);
+    });
+
+    test('pick lists deploy before the modules that use them, and groups cover every module once', () => {
+        const plan = buildPlan(manifest);
+        const firstModule = plan.findIndex((st) => st.kind === 'module');
+        for (const r of manifest.rpcs) {
+            const i = plan.findIndex((st) => st.kind === 'rpc' && st.name === r.name);
+            assert.ok(i >= 0 && i < firstModule, `${r.name} must deploy before modules`);
+        }
+        const refs = [];
+        for (const f of ['modules/v2SendSms/parameters.imljson', 'modules/v2SendMms/parameters.imljson', 'modules/v1SendSms/parameters.imljson', 'webhooks/v1Inbound/parameters.imljson']) {
+            for (const x of JSON.parse(fs.readFileSync(path.join(__dirname, '..', f), 'utf8'))) if (typeof x.options === 'string') refs.push(x.options.replace('rpc://', ''));
+        }
+        for (const r of refs) assert.ok(manifest.rpcs.some((x) => x.name === r), `rpc://${r} is not declared`);
+        const grouped = manifest.groups.flatMap((g) => g.modules).sort();
+        assert.deepStrictEqual(grouped, manifest.modules.map((m) => m.name).sort());
     });
 
     test('env file parsing', () => {

@@ -7,7 +7,7 @@
 	{
 		"name": "send_at",
 		"type": "date",
-		"label": "Send At"
+		"label": "Send at"
 	},
 	{
 		"name": "recipients",
@@ -22,12 +22,12 @@
 	{
 		"name": "sms",
 		"type": "number",
-		"label": "SMS Parts"
+		"label": "SMS parts"
 	},
 	{
 		"name": "delivery_stats",
 		"type": "collection",
-		"label": "Delivery Stats",
+		"label": "Delivery stats",
 		"spec": [
 			{
 				"name": "delivered",

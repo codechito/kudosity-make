@@ -1,10 +1,11 @@
 [
 	{
 		"name": "sender",
-		"type": "text",
+		"type": "select",
 		"label": "Sender",
 		"required": true,
-		"help": "Sender ID or virtual number the message is sent from. Use **Get Sender IDs (V1)** to see what this account may send as."
+		"help": "Sender ID or virtual number the message is sent from. Use **Get Sender IDs (V1)** to see what this account may send as. Pick a verified sender name or registered mobile. Virtual numbers are not in this list: switch the field to **Map** and type the number.",
+		"options": "rpc://listV2Senders"
 	},
 	{
 		"name": "recipient",
@@ -38,13 +39,13 @@
 	{
 		"name": "message_ref",
 		"type": "text",
-		"label": "Message Reference",
+		"label": "Message reference",
 		"help": "Your own reference, echoed back on status webhooks. Useful for matching a send to its delivery receipt."
 	},
 	{
 		"name": "track_links",
 		"type": "boolean",
-		"label": "Track Links",
+		"label": "Track links",
 		"default": false,
 		"help": "Shorten links in the message and report clicks as **Link Hit** events (see **Watch Events**)."
 	}

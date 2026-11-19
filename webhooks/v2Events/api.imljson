@@ -1,8 +1,19 @@
 {
-	"output": "{{body}}",
+	"output": {
+		"event_type": "{{body.event_type}}",
+		"timestamp": "{{parseDate(body.timestamp)}}",
+		"webhook_id": "{{body.webhook_id}}",
+		"webhook_name": "{{body.webhook_name}}",
+		"mo": "{{body.mo}}",
+		"status": "{{body.status}}",
+		"opt_out": "{{body.opt_out}}",
+		"link_hit": "{{body.link_hit}}"
+	},
 	"respond": {
 		"status": 200,
 		"type": "json",
-		"body": { "received": true }
+		"body": {
+			"received": true
+		}
 	}
 }

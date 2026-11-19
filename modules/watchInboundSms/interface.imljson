@@ -2,12 +2,12 @@
 	{
 		"name": "phone",
 		"type": "text",
-		"label": "From Number"
+		"label": "From number"
 	},
 	{
 		"name": "id",
 		"type": "text",
-		"label": "Original Message ID"
+		"label": "Original message ID"
 	},
 	{
 		"name": "response_id",
@@ -27,21 +27,21 @@
 	{
 		"name": "opt_out",
 		"type": "boolean",
-		"label": "Opted Out"
+		"label": "Opted out"
 	},
 	{
 		"name": "to",
 		"type": "text",
-		"label": "To Number"
+		"label": "To number"
 	},
 	{
 		"name": "received_at",
-		"type": "text",
-		"label": "Received At"
+		"type": "date",
+		"label": "Received at"
 	},
 	{
 		"name": "raw",
 		"type": "any",
-		"label": "Raw Payload"
+		"label": "Raw payload"
 	}
 ]

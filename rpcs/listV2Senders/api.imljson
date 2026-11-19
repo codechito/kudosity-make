@@ -1,0 +1,25 @@
+{
+	"url": "/senders/registrations",
+	"method": "GET",
+	"headers": {
+		"User-Agent": "kudosity-make/0.1.0",
+		"X-Kudosity-Source": "kudosity-make",
+		"X-Kudosity-Source-Version": "0.1.0",
+		"X-Kudosity-Action": "senders.list"
+	},
+	"qs": {
+		"status": "VERIFIED",
+		"limit": 100,
+		"page": "{{pagination.page}}"
+	},
+	"response": {
+		"iterate": "{{body.data.registrations}}",
+		"output": {
+			"label": "{{item.sender}} ({{if(item.type = 'ALPHANUMERIC', 'sender name', 'mobile')}})",
+			"value": "{{item.sender}}"
+		}
+	},
+	"pagination": {
+		"condition": "{{body.meta.pagination.page * body.meta.pagination.limit < body.meta.pagination.total_count}}"
+	}
+}

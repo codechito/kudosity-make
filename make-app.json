@@ -32,38 +32,49 @@
   "webhooks": [
     {
       "key": "v2Events",
-      "label": "Kudosity V2 Events",
+      "label": "Kudosity V2 events",
       "type": "web",
       "connection": "v2",
       "dir": "webhooks/v2Events"
     },
     {
       "key": "v1Inbound",
-      "label": "Kudosity V1 Inbound SMS",
+      "label": "Kudosity V1 inbound SMS",
       "type": "web",
       "connection": "v1",
       "dir": "webhooks/v1Inbound"
     }
   ],
   "modules": [
-    { "name": "v2SendSms", "label": "Send an SMS", "description": "Sends an SMS through the Kudosity V2 API.", "type": "action", "connection": "v2" },
-    { "name": "v2SendMms", "label": "Send an MMS", "description": "Sends an MMS with one or more media attachments.", "type": "action", "connection": "v2" },
-    { "name": "v2MakeApiCall", "label": "Make an API Call", "description": "Performs an arbitrary authorized call to the Kudosity V2 API.", "type": "universal", "connection": "v2" },
-    { "name": "v1SendSms", "label": "Send an SMS (V1)", "description": "Sends an SMS through the Kudosity V1 API.", "type": "action", "connection": "v1" },
-    { "name": "v1CancelSms", "label": "Cancel a Scheduled SMS (V1)", "description": "Cancels a scheduled SMS.", "type": "action", "connection": "v1" },
-    { "name": "v1GetDeliveryStatus", "label": "Get Delivery Status (V1)", "description": "Gets the delivery status of a sent SMS.", "type": "action", "connection": "v1" },
-    { "name": "v1FormatNumber", "label": "Format a Number (V1)", "description": "Formats a mobile number to international format.", "type": "action", "connection": "v1" },
-    { "name": "v1GetSenderIds", "label": "Get Sender IDs (V1)", "description": "Lists the sender IDs and numbers this account may send from.", "type": "action", "connection": "v1" },
-    { "name": "v1GetAccount", "label": "Get Account Balance (V1)", "description": "Gets the account balance and its currency.", "type": "action", "connection": "v1" },
-    { "name": "v1GetNumbers", "label": "List Virtual Numbers (V1)", "description": "Lists the virtual numbers leased by the account, or those available to lease.", "type": "search", "connection": "v1" },
-    { "name": "v1GetReplies", "label": "List Replies (V1)", "description": "Lists replies to a sent message.", "type": "search", "connection": "v1" },
-    { "name": "v1MakeApiCall", "label": "Make an API Call (V1)", "description": "Performs an arbitrary authorized call to the Kudosity V1 API.", "type": "universal", "connection": "v1" },
-    { "name": "watchEvents", "label": "Watch Events", "description": "Triggers on Kudosity V2 events such as inbound SMS, delivery status and opt-outs.", "type": "instant", "connection": "v2", "webhook": "v2Events" },
-    { "name": "watchInboundSms", "label": "Watch Inbound SMS (V1)", "description": "Triggers when a virtual number receives an SMS.", "type": "instant", "connection": "v1", "webhook": "v1Inbound" }
+    { "name": "v2SendSms", "label": "Send an SMS", "description": "Sends an SMS through the Kudosity V2 API.", "type": "action", "connection": "v2", "crud": "create" },
+    { "name": "v2SendMms", "label": "Send an MMS", "description": "Sends an MMS with one or more media attachments.", "type": "action", "connection": "v2", "crud": "create" },
+    { "name": "v2MakeApiCall", "label": "Make an API call", "description": "Performs an arbitrary authorized call to the Kudosity V2 API.", "type": "universal", "connection": "v2" },
+    { "name": "v1SendSms", "label": "Send an SMS (V1)", "description": "Sends an SMS through the Kudosity V1 API.", "type": "action", "connection": "v1", "crud": "create" },
+    { "name": "v1CancelSms", "label": "Cancel a scheduled SMS (V1)", "description": "Cancels a scheduled SMS.", "type": "action", "connection": "v1", "crud": "delete" },
+    { "name": "v1GetDeliveryStatus", "label": "Get delivery status (V1)", "description": "Gets the delivery status of a sent SMS.", "type": "action", "connection": "v1", "crud": "read" },
+    { "name": "v1FormatNumber", "label": "Format a number (V1)", "description": "Formats a mobile number to international format.", "type": "action", "connection": "v1", "crud": "read" },
+    { "name": "v1GetAccount", "label": "Get account balance (V1)", "description": "Gets the account balance and its currency.", "type": "action", "connection": "v1", "crud": "read" },
+    { "name": "v1GetNumbers", "label": "List virtual numbers (V1)", "description": "Lists the virtual numbers leased by the account, or those available to lease.", "type": "search", "connection": "v1" },
+    { "name": "v1GetReplies", "label": "List replies (V1)", "description": "Lists replies to a sent message.", "type": "search", "connection": "v1" },
+    { "name": "v1MakeApiCall", "label": "Make an API call (V1)", "description": "Performs an arbitrary authorized call to the Kudosity V1 API.", "type": "universal", "connection": "v1" },
+    { "name": "watchEvents", "label": "Watch events", "description": "Triggers on Kudosity V2 events such as inbound SMS, delivery status and opt-outs.", "type": "instant", "connection": "v2", "webhook": "v2Events" },
+    { "name": "watchInboundSms", "label": "Watch inbound SMS (V1)", "description": "Triggers when a virtual number receives an SMS.", "type": "instant", "connection": "v1", "webhook": "v1Inbound" }
   ],
-    "$parkedComment": "Modules kept in the repo but not deployed, so the first Make review only covers channels the test account can run. WhatsApp needs a WhatsApp-enabled sender and RCS an RCS agent sender; the test account has neither yet (SAL-103). To publish one later, move its entry back into modules and deploy; Make reviews the update.",
+    "$parkedComment": "Modules kept in the repo but not deployed, so the first Make review only covers channels the test account can run. WhatsApp needs a WhatsApp-enabled sender and RCS an RCS agent sender; the test account has neither yet (SAL-103). Get Sender IDs (V1) is parked because get-sender-ids.json is being replaced (decision 19 Nov 2026). To publish one later, move its entry back into modules and deploy; Make reviews the update.",
     "parkedModules": [
-    { "name": "v2SendWhatsApp", "label": "Send a WhatsApp Message", "description": "Sends a WhatsApp text or approved template message, with optional SMS fallback.", "type": "action", "connection": "v2" },
-    { "name": "v2SendRcs", "label": "Send an RCS Message", "description": "Sends an RCS text or media message, with optional SMS fallback.", "type": "action", "connection": "v2" }
+    { "name": "v1GetSenderIds", "label": "Get sender IDs (V1)", "description": "Lists the sender IDs and numbers this account may send from.", "type": "action", "connection": "v1" },
+    { "name": "v2SendWhatsApp", "label": "Send a WhatsApp message", "description": "Sends a WhatsApp text or approved template message, with optional SMS fallback.", "type": "action", "connection": "v2" },
+    { "name": "v2SendRcs", "label": "Send an RCS message", "description": "Sends an RCS text or media message, with optional SMS fallback.", "type": "action", "connection": "v2" }
+    ],
+    "rpcs": [
+        { "name": "listV2Senders", "label": "List senders", "connection": "v2", "dir": "rpcs/listV2Senders" },
+        { "name": "listV1Numbers", "label": "List virtual numbers", "connection": "v1", "dir": "rpcs/listV1Numbers" }
+    ],
+    "groups": [
+        { "label": "Send messages", "modules": ["v2SendSms", "v2SendMms", "v1SendSms", "v1CancelSms"] },
+        { "label": "Messages and replies (V1)", "modules": ["v1GetDeliveryStatus", "v1GetReplies"] },
+        { "label": "Account and numbers (V1)", "modules": ["v1GetAccount", "v1GetNumbers", "v1FormatNumber"] },
+        { "label": "Triggers", "modules": ["watchEvents", "watchInboundSms"] },
+        { "label": "Other", "modules": ["v2MakeApiCall", "v1MakeApiCall"] }
     ]
 }

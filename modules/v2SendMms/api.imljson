@@ -2,7 +2,6 @@
 	"url": "/mms",
 	"method": "POST",
 	"headers": {
-		"x-api-key": "{{connection.apiKey}}",
 		"User-Agent": "kudosity-make/0.1.0",
 		"X-Kudosity-Source": "kudosity-make",
 		"X-Kudosity-Source-Version": "0.1.0",
@@ -18,6 +17,20 @@
 		"track_links": "{{parameters.track_links}}"
 	},
 	"response": {
-		"output": "{{body}}"
+		"output": {
+			"id": "{{body.id}}",
+			"recipient": "{{body.recipient}}",
+			"sender": "{{body.sender}}",
+			"country": "{{body.country}}",
+			"subject": "{{body.subject}}",
+			"message": "{{body.message}}",
+			"message_ref": "{{body.message_ref}}",
+			"content_urls": "{{body.content_urls}}",
+			"status": "{{body.status}}",
+			"track_links": "{{body.track_links}}",
+			"is_sandbox": "{{body.is_sandbox}}",
+			"created_at": "{{parseDate(body.created_at)}}",
+			"updated_at": "{{parseDate(body.updated_at)}}"
+		}
 	}
 }

@@ -16,7 +16,7 @@
 	{
 		"name": "content_type",
 		"type": "select",
-		"label": "Content Type",
+		"label": "Content type",
 		"required": true,
 		"default": "text",
 		"options": [
@@ -40,21 +40,21 @@
 					{
 						"name": "template_name",
 						"type": "text",
-						"label": "Template Name",
+						"label": "Template name",
 						"required": true,
 						"help": "Name of a WhatsApp template approved for this account."
 					},
 					{
 						"name": "template_locale",
 						"type": "text",
-						"label": "Template Locale",
+						"label": "Template locale",
 						"default": "en",
 						"help": "Locale of the template, e.g. en or en_US."
 					},
 					{
 						"name": "template_parameters",
 						"type": "array",
-						"label": "Template Parameters",
+						"label": "Template parameters",
 						"spec": {
 							"type": "text",
 							"label": "Value"
@@ -68,25 +68,25 @@
 	{
 		"name": "message_ref",
 		"type": "text",
-		"label": "Message Reference",
+		"label": "Message reference",
 		"help": "Your own reference, echoed back on status webhooks. Useful for matching a send to its delivery receipt."
 	},
 	{
 		"name": "sms_fallback",
 		"type": "collection",
-		"label": "SMS Fallback",
+		"label": "SMS fallback",
 		"help": "Send an SMS instead if this message cannot be delivered.",
 		"spec": [
 			{
 				"name": "sender",
 				"type": "text",
-				"label": "Fallback Sender",
+				"label": "Fallback sender",
 				"help": "SMS sender ID or virtual number."
 			},
 			{
 				"name": "message",
 				"type": "text",
-				"label": "Fallback Message",
+				"label": "Fallback message",
 				"multiline": true
 			}
 		]

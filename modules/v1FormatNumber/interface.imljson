@@ -2,32 +2,32 @@
 	{
 		"name": "international",
 		"type": "text",
-		"label": "International Number"
+		"label": "International number"
 	},
 	{
 		"name": "countrycode",
 		"type": "number",
-		"label": "Country Calling Code"
+		"label": "Country calling code"
 	},
 	{
 		"name": "nationalnumber",
 		"type": "text",
-		"label": "National Number"
+		"label": "National number"
 	},
 	{
 		"name": "national_leading_zeroes",
 		"type": "number",
-		"label": "National Leading Zeroes"
+		"label": "National leading zeroes"
 	},
 	{
 		"name": "rawinput",
 		"type": "text",
-		"label": "Raw Input"
+		"label": "Raw input"
 	},
 	{
 		"name": "type",
 		"type": "number",
-		"label": "Number Type"
+		"label": "Number type"
 	},
 	{
 		"name": "isValid",

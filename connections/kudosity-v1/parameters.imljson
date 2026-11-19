@@ -1,15 +1,15 @@
 [
 	{
 		"name": "apiKey",
-		"type": "text",
-		"label": "API Key",
+		"type": "password",
+		"label": "API key",
 		"required": true,
 		"help": "Find your API key in your Kudosity account under **Settings > API**."
 	},
 	{
 		"name": "apiSecret",
 		"type": "password",
-		"label": "API Secret",
+		"label": "API secret",
 		"required": true,
 		"help": "Your Kudosity API secret. v1 authenticates with Basic auth over key:secret, so both halves are needed."
 	}

@@ -16,50 +16,51 @@
 	},
 	{
 		"name": "from",
-		"type": "text",
+		"type": "select",
 		"label": "From",
-		"help": "Sender ID or virtual number. Leave blank to use the account default."
+		"help": "Sender ID or virtual number. Leave blank to use the account default. Pick one of your virtual numbers, or switch the field to **Map** to use a sender name.",
+		"options": "rpc://listV1Numbers"
 	},
 	{
 		"name": "countrycode",
 		"type": "text",
-		"label": "Country Code",
+		"label": "Country code",
 		"help": "Two-letter country code, used to expand local-format numbers (e.g. AU)."
 	},
 	{
 		"name": "tracked_link_url",
 		"type": "url",
-		"label": "Tracked Link URL",
+		"label": "Tracked link URL",
 		"help": "URL to shorten and track. Put [tracked-link] in the message where it should appear."
 	},
 	{
 		"name": "validity",
 		"type": "uinteger",
-		"label": "Validity (Minutes)",
+		"label": "Validity (minutes)",
 		"help": "Give up on delivery after this many minutes. Leave blank to let the carrier decide."
 	},
 	{
 		"name": "send_at",
 		"type": "date",
-		"label": "Send At",
+		"label": "Send at",
 		"help": "Schedule the message for later. Leave blank to send now."
 	},
 	{
 		"name": "dlr_callback",
 		"type": "url",
-		"label": "Delivery Receipt Callback URL",
+		"label": "Delivery receipt callback URL",
 		"help": "Where delivery receipts are POSTed."
 	},
 	{
 		"name": "reply_callback",
 		"type": "url",
-		"label": "Reply Callback URL",
+		"label": "Reply callback URL",
 		"help": "Where replies to this message are POSTed. A **Watch Inbound SMS (V1)** trigger receives these."
 	},
 	{
 		"name": "link_hits_callback",
 		"type": "url",
-		"label": "Link Hits Callback URL",
+		"label": "Link hits callback URL",
 		"help": "Where tracked-link clicks are POSTed."
 	}
 ]

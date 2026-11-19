@@ -1,8 +1,8 @@
 [
 	{
 		"name": "apiKey",
-		"type": "text",
-		"label": "API Key",
+		"type": "password",
+		"label": "API key",
 		"required": true,
 		"help": "Find your API key in your Kudosity account under **Settings > API**. It is sent as the `x-api-key` header."
 	}

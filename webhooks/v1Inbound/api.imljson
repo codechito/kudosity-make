@@ -1,14 +1,14 @@
 {
 	"output": {
-		"phone":       "{{ifempty(query.mobile, body.mobile, body.msisdn, body.from)}}",
-		"id":          "{{ifempty(query.message_id, body.message_id, body.id)}}",
+		"phone": "{{ifempty(query.mobile, ifempty(body.mobile, ifempty(body.msisdn, body.from)))}}",
+		"id": "{{ifempty(query.message_id, ifempty(body.message_id, body.id))}}",
 		"response_id": "{{ifempty(query.response_id, body.response_id)}}",
-		"message":     "{{ifempty(query.response, body.response, body.message)}}",
-		"status":      "{{if(ifempty(query.is_optout, body.is_optout) = 'yes', 'opt-out', 'received')}}",
-		"opt_out":     "{{ifempty(query.is_optout, body.is_optout) = 'yes'}}",
-		"to":          "{{ifempty(query.longcode, body.longcode, body.to)}}",
-		"received_at": "{{ifempty(query.datetime_entry, body.datetime_entry, body.datetime, body.received_at)}}",
-		"raw":         "{{ifempty(query, body)}}"
+		"message": "{{ifempty(query.response, ifempty(body.response, body.message))}}",
+		"status": "{{if(ifempty(query.is_optout, body.is_optout) = 'yes', 'opt-out', 'received')}}",
+		"opt_out": "{{ifempty(query.is_optout, body.is_optout) = 'yes'}}",
+		"to": "{{ifempty(query.longcode, ifempty(body.longcode, body.to))}}",
+		"received_at": "{{parseDate(ifempty(query.datetime_entry, ifempty(body.datetime_entry, ifempty(body.datetime, body.received_at))), 'YYYY-MM-DD HH:mm:ss', 'UTC')}}",
+		"raw": "{{ifempty(query, body)}}"
 	},
 	"respond": {
 		"status": 200

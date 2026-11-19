@@ -12,11 +12,11 @@
 	{
 		"name": "next_charge",
 		"type": "date",
-		"label": "Next Charge"
+		"label": "Next charge"
 	},
 	{
 		"name": "auto_renew",
 		"type": "boolean",
-		"label": "Auto Renew"
+		"label": "Auto renew"
 	}
 ]

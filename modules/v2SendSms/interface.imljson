@@ -12,7 +12,7 @@
 	{
 		"name": "recipient_country",
 		"type": "text",
-		"label": "Recipient Country"
+		"label": "Recipient country"
 	},
 	{
 		"name": "sender",
@@ -22,12 +22,12 @@
 	{
 		"name": "sender_country",
 		"type": "text",
-		"label": "Sender Country"
+		"label": "Sender country"
 	},
 	{
 		"name": "message_ref",
 		"type": "text",
-		"label": "Message Reference"
+		"label": "Message reference"
 	},
 	{
 		"name": "message",
@@ -42,12 +42,12 @@
 	{
 		"name": "sms_count",
 		"type": "text",
-		"label": "SMS Count"
+		"label": "SMS count"
 	},
 	{
 		"name": "is_gsm",
 		"type": "boolean",
-		"label": "GSM Encoded"
+		"label": "GSM encoded"
 	},
 	{
 		"name": "is_sandbox",
@@ -57,12 +57,12 @@
 	{
 		"name": "routed_via",
 		"type": "text",
-		"label": "Routed Via"
+		"label": "Routed via"
 	},
 	{
 		"name": "track_links",
 		"type": "boolean",
-		"label": "Track Links"
+		"label": "Track links"
 	},
 	{
 		"name": "direction",
@@ -72,11 +72,11 @@
 	{
 		"name": "created_at",
 		"type": "date",
-		"label": "Created At"
+		"label": "Created at"
 	},
 	{
 		"name": "updated_at",
 		"type": "date",
-		"label": "Updated At"
+		"label": "Updated at"
 	}
 ]

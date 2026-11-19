@@ -9,7 +9,7 @@
 	{
 		"name": "msisdn",
 		"type": "text",
-		"label": "Recipient Number",
+		"label": "Recipient number",
 		"required": true,
 		"help": "The number the message was sent to. The API requires this alongside the message ID."
 	}

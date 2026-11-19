@@ -17,12 +17,12 @@
 	{
 		"name": "send_at",
 		"type": "date",
-		"label": "Send At"
+		"label": "Send at"
 	},
 	{
 		"name": "datetime",
 		"type": "date",
-		"label": "Status Updated At"
+		"label": "Status updated at"
 	},
 	{
 		"name": "message",

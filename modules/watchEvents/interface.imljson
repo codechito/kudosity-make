@@ -2,7 +2,7 @@
 	{
 		"name": "event_type",
 		"type": "text",
-		"label": "Event Type"
+		"label": "Event type"
 	},
 	{
 		"name": "timestamp",
@@ -17,12 +17,12 @@
 	{
 		"name": "webhook_name",
 		"type": "text",
-		"label": "Webhook Name"
+		"label": "Webhook name"
 	},
 	{
 		"name": "mo",
 		"type": "collection",
-		"label": "Inbound Message",
+		"label": "Inbound message",
 		"spec": [
 			{
 				"name": "type",
@@ -52,7 +52,7 @@
 			{
 				"name": "routed_via",
 				"type": "text",
-				"label": "Routed Via"
+				"label": "Routed via"
 			},
 			{
 				"name": "media",
@@ -74,7 +74,7 @@
 			{
 				"name": "last_message",
 				"type": "collection",
-				"label": "Last Message Sent",
+				"label": "Last message sent",
 				"spec": [
 					{
 						"name": "type",
@@ -94,7 +94,7 @@
 					{
 						"name": "message_ref",
 						"type": "text",
-						"label": "Message Reference"
+						"label": "Message reference"
 					},
 					{
 						"name": "recipient",
@@ -128,7 +128,7 @@
 			{
 				"name": "message_ref",
 				"type": "text",
-				"label": "Message Reference"
+				"label": "Message reference"
 			},
 			{
 				"name": "sender",
@@ -138,7 +138,7 @@
 			{
 				"name": "routed_via",
 				"type": "text",
-				"label": "Routed Via"
+				"label": "Routed via"
 			},
 			{
 				"name": "recipient",
@@ -165,7 +165,7 @@
 			{
 				"name": "source_message",
 				"type": "collection",
-				"label": "Source Message",
+				"label": "Source message",
 				"spec": [
 					{
 						"name": "type",
@@ -185,7 +185,7 @@
 					{
 						"name": "message_ref",
 						"type": "text",
-						"label": "Message Reference"
+						"label": "Message reference"
 					},
 					{
 						"name": "recipient",
@@ -204,7 +204,7 @@
 	{
 		"name": "link_hit",
 		"type": "collection",
-		"label": "Link Hit",
+		"label": "Link hit",
 		"spec": [
 			{
 				"name": "hits",
@@ -219,7 +219,7 @@
 			{
 				"name": "source_message",
 				"type": "collection",
-				"label": "Source Message",
+				"label": "Source message",
 				"spec": [
 					{
 						"name": "type",
@@ -239,7 +239,7 @@
 					{
 						"name": "message_ref",
 						"type": "text",
-						"label": "Message Reference"
+						"label": "Message reference"
 					},
 					{
 						"name": "recipient",

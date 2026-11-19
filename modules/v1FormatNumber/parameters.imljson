@@ -8,7 +8,7 @@
 	{
 		"name": "countrycode",
 		"type": "text",
-		"label": "Country Code",
+		"label": "Country code",
 		"required": true,
 		"default": "AU",
 		"help": "Two-letter country code, e.g. AU."

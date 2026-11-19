@@ -17,36 +17,36 @@
 	{
 		"name": "received_at",
 		"type": "date",
-		"label": "Received At"
+		"label": "Received at"
 	},
 	{
 		"name": "first_name",
 		"type": "text",
-		"label": "First Name"
+		"label": "First name"
 	},
 	{
 		"name": "last_name",
 		"type": "text",
-		"label": "Last Name"
+		"label": "Last name"
 	},
 	{
 		"name": "msisdn",
 		"type": "text",
-		"label": "From Number"
+		"label": "From number"
 	},
 	{
 		"name": "response",
 		"type": "text",
-		"label": "Reply Text"
+		"label": "Reply text"
 	},
 	{
 		"name": "longcode",
 		"type": "text",
-		"label": "Virtual Number"
+		"label": "Virtual number"
 	},
 	{
 		"name": "original_message",
 		"type": "text",
-		"label": "Original Message"
+		"label": "Original message"
 	}
 ]

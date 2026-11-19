@@ -32,7 +32,7 @@
 	{
 		"name": "message_ref",
 		"type": "text",
-		"label": "Message Reference"
+		"label": "Message reference"
 	},
 	{
 		"name": "content_urls",
@@ -50,7 +50,7 @@
 	{
 		"name": "track_links",
 		"type": "boolean",
-		"label": "Track Links"
+		"label": "Track links"
 	},
 	{
 		"name": "is_sandbox",
@@ -60,11 +60,11 @@
 	{
 		"name": "created_at",
 		"type": "date",
-		"label": "Created At"
+		"label": "Created at"
 	},
 	{
 		"name": "updated_at",
 		"type": "date",
-		"label": "Updated At"
+		"label": "Updated at"
 	}
 ]

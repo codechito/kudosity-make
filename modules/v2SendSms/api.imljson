@@ -2,7 +2,6 @@
 	"url": "/sms",
 	"method": "POST",
 	"headers": {
-		"x-api-key": "{{connection.apiKey}}",
 		"User-Agent": "kudosity-make/0.1.0",
 		"X-Kudosity-Source": "kudosity-make",
 		"X-Kudosity-Source-Version": "0.1.0",
@@ -16,6 +15,23 @@
 		"track_links": "{{parameters.track_links}}"
 	},
 	"response": {
-		"output": "{{body}}"
+		"output": {
+			"id": "{{body.id}}",
+			"recipient": "{{body.recipient}}",
+			"recipient_country": "{{body.recipient_country}}",
+			"sender": "{{body.sender}}",
+			"sender_country": "{{body.sender_country}}",
+			"message_ref": "{{body.message_ref}}",
+			"message": "{{body.message}}",
+			"status": "{{body.status}}",
+			"sms_count": "{{body.sms_count}}",
+			"is_gsm": "{{body.is_gsm}}",
+			"is_sandbox": "{{body.is_sandbox}}",
+			"routed_via": "{{body.routed_via}}",
+			"track_links": "{{body.track_links}}",
+			"direction": "{{body.direction}}",
+			"created_at": "{{parseDate(body.created_at)}}",
+			"updated_at": "{{parseDate(body.updated_at)}}"
+		}
 	}
 }

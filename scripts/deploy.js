@@ -75,6 +75,12 @@ function buildPlan(manifest = loadManifest()) {
         steps.push({ kind: 'webhook', key: w.key, label: w.label, type: w.type, connection: w.connection,
             sections: WEBHOOK_SECTIONS.map((s) => ({ section: s, file: need(`${w.dir}/${s}.imljson`) })) });
     }
+    // Remote procedures (pick lists). Planned before modules, which reference them as rpc://name.
+    for (const r of manifest.rpcs || []) {
+        if (!connKeys.has(r.connection)) missing.push(`rpc ${r.name}: unknown connection ${r.connection}`);
+        steps.push({ kind: 'rpc', name: r.name, label: r.label, connection: r.connection,
+            sections: [{ section: 'api', file: need(`${r.dir}/api.imljson`) }] });
+    }
     const hookKeys = new Set(manifest.webhooks.map((w) => w.key));
     for (const m of manifest.modules) {
         if (!TYPE_IDS[m.type]) missing.push(`module ${m.name}: unknown type ${m.type}`);
@@ -85,7 +91,15 @@ function buildPlan(manifest = loadManifest()) {
             .map((f) => ({ section: f.section, file: need(`modules/${m.name}/${f.file}.imljson`) }));
         if (m.type !== 'instant') sections.push({ section: 'parameters', text: '[]' });
         steps.push({ kind: 'module', name: m.name, label: m.label, description: m.description,
-            typeId: TYPE_IDS[m.type], connection: m.connection, webhook: m.webhook || null, sections });
+            typeId: TYPE_IDS[m.type], connection: m.connection, webhook: m.webhook || null, crud: m.crud || null, sections });
+    }
+    // Module groups (how modules are organised in Make's module picker). Every published module once.
+    if (manifest.groups) {
+        const published = manifest.modules.map((m) => m.name);
+        const grouped = manifest.groups.flatMap((g) => g.modules);
+        for (const name of published) if (!grouped.includes(name)) missing.push(`module ${name} is in no group`);
+        for (const name of grouped) if (!published.includes(name)) missing.push(`group lists ${name}, which is not a published module`);
+        steps.push({ kind: 'groups', groups: manifest.groups });
     }
     // Every module folder on disk must be in the manifest, so nothing is silently left out.
     // Parked modules (manifest.parkedModules) count as declared but are deliberately not deployed.
@@ -174,6 +188,19 @@ async function apply(client, manifest, steps, log = console.log, { noFunctions =
             state[plural][step.key] = id;
             saveState(name, state);
             for (const s of step.sections) await putJsonc(`/sdk/apps/${plural}/${id}/${s.section}`, s.file);
+        } else if (step.kind === 'rpc') {
+            const existing = listOf(await client.request('GET', `${app}/rpcs`), 'appRpcs').some((r) => r.name === step.name);
+            const connection = state.connections[step.connection];
+            if (!existing) {
+                await client.request('POST', `${app}/rpcs`, { json: { name: step.name, label: step.label, connection } });
+            } else {
+                await client.request('PATCH', `${app}/rpcs/${step.name}`, { json: { label: step.label, connection } });
+            }
+            for (const s of step.sections) await putJsonc(`${app}/rpcs/${step.name}/${s.section}`, s.file);
+            log(`rpc ${step.name}: ${existing ? 'updated' : 'created'}`);
+        } else if (step.kind === 'groups') {
+            await client.request('PUT', `${app}/groups`, { json: step.groups });
+            log(`groups: ${step.groups.map((g) => g.label).join(', ')}`);
         } else if (step.kind === 'module') {
             const existing = listOf(await client.request('GET', `${app}/modules`), 'appModules').find((m) => m.name === step.name);
             const connection = state.connections[step.connection];
@@ -186,10 +213,10 @@ async function apply(client, manifest, steps, log = console.log, { noFunctions =
             if (!existing || (existing.typeId !== undefined && existing.typeId !== step.typeId)) {
                 await client.request('POST', `${app}/modules`, { json: {
                     name: step.name, typeId: step.typeId, label: step.label, description: step.description,
-                    connection, ...(webhook ? { webhook } : {}) } });
+                    connection, ...(webhook ? { webhook } : {}), ...(step.crud ? { crud: step.crud } : {}) } });
                 log(`module ${step.name}: created`);
             } else {
-                await client.request('PATCH', `${app}/modules/${step.name}`, { json: { label: step.label, description: step.description, connection } });
+                await client.request('PATCH', `${app}/modules/${step.name}`, { json: { label: step.label, description: step.description, connection, ...(step.crud ? { crud: step.crud } : {}) } });
                 log(`module ${step.name}: updated`);
             }
             for (const s of step.sections) await putJsonc(`${app}/modules/${step.name}/${s.section}`, s.file, s.text);

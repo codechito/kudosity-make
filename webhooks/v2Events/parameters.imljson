@@ -2,7 +2,7 @@
 	{
 		"name": "eventTypes",
 		"type": "select",
-		"label": "Event Types",
+		"label": "Event types",
 		"multiple": true,
 		"required": true,
 		"default": [
@@ -10,31 +10,31 @@
 		],
 		"options": [
 			{
-				"label": "SMS Inbound",
+				"label": "SMS inbound",
 				"value": "SMS_INBOUND"
 			},
 			{
-				"label": "SMS Status",
+				"label": "SMS status",
 				"value": "SMS_STATUS"
 			},
 			{
-				"label": "MMS Inbound",
+				"label": "MMS inbound",
 				"value": "MMS_INBOUND"
 			},
 			{
-				"label": "MMS Status",
+				"label": "MMS status",
 				"value": "MMS_STATUS"
 			},
 			{
-				"label": "RCS Status",
+				"label": "RCS status",
 				"value": "RCS_STATUS"
 			},
 			{
-				"label": "Opt Out",
+				"label": "Opt out",
 				"value": "OPT_OUT"
 			},
 			{
-				"label": "Link Hit",
+				"label": "Link hit",
 				"value": "LINK_HIT"
 			}
 		],

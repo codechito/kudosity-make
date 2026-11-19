@@ -7,7 +7,7 @@
 	{
 		"name": "message_ref",
 		"type": "text",
-		"label": "Message Reference"
+		"label": "Message reference"
 	},
 	{
 		"name": "sender",
@@ -22,12 +22,12 @@
 	{
 		"name": "recipient_country",
 		"type": "text",
-		"label": "Recipient Country"
+		"label": "Recipient country"
 	},
 	{
 		"name": "content_type",
 		"type": "text",
-		"label": "Content Type"
+		"label": "Content type"
 	},
 	{
 		"name": "content",
@@ -63,7 +63,7 @@
 	{
 		"name": "sms_fallback",
 		"type": "collection",
-		"label": "SMS Fallback",
+		"label": "SMS fallback",
 		"spec": [
 			{
 				"name": "sender",
@@ -80,6 +80,6 @@
 	{
 		"name": "created_at",
 		"type": "date",
-		"label": "Created At"
+		"label": "Created at"
 	}
 ]

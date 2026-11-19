@@ -46,6 +46,8 @@ const EXPECTED = {
     'modules/v2SendWhatsApp/api.imljson': 'whatsapp.send',
     'webhooks/v1Inbound/attach.imljson': 'trigger.subscribe',
     'webhooks/v1Inbound/detach.imljson': 'trigger.unsubscribe',
+    'rpcs/listV2Senders/api.imljson': 'senders.list',
+    'rpcs/listV1Numbers/api.imljson': 'numbers.list',
     'webhooks/v2Events/attach.imljson': 'trigger.subscribe',
     'webhooks/v2Events/detach.imljson': 'trigger.unsubscribe',
 };
@@ -53,7 +55,7 @@ const EXPECTED = {
 /** Every file on disk that makes an outbound request. */
 function requestFiles() {
     const found = [];
-    for (const dir of ['connections', 'modules']) {
+    for (const dir of ['connections', 'modules', 'rpcs']) {
         for (const name of fs.readdirSync(path.join(ROOT, dir))) {
             // Instant triggers have no api.imljson: their webhook makes the requests.
             if (fs.existsSync(path.join(ROOT, dir, name, 'api.imljson'))) found.push(`${dir}/${name}/api.imljson`);
@@ -94,14 +96,17 @@ describe('usage tracking headers', () => {
         assertConstant(read('base.imljson').headers, 'base.imljson');
     });
 
-    test('V2 request files authenticate themselves rather than relying on base', () => {
-        // Whether Make merges or replaces base headers when a module sets its own is
-        // not verified, so files that set headers must also set their own auth.
+    test('V2 modules inherit x-api-key from the Base; V1 files authenticate themselves', () => {
+        // Make's review (19 Nov 2026, item 10) requires authorisation to live in the Base, which
+        // modules inherit; module headers are merged with the Base's. V2 modules therefore must
+        // not set x-api-key themselves. V1 talks to a different API (Basic auth on
+        // api.transmitsms.com) with its own connection, so its files keep their Authorization.
+        assert.strictEqual(read('base.imljson').headers['x-api-key'], '{{connection.apiKey}}', 'base must authenticate V2');
         for (const file of Object.keys(EXPECTED)) {
             for (const { headers: h } of requests(file)) {
                 const v1 = file.includes('v1') || file.includes('kudosity-v1');
                 if (v1) assert.match(h.Authorization, /^Basic /, file);
-                else assert.ok(h['x-api-key'], `${file} has no x-api-key`);
+                else if (file.startsWith('modules/')) assert.ok(!h['x-api-key'], `${file} must inherit x-api-key from the Base`);
             }
         }
     });
