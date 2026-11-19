@@ -61,9 +61,9 @@ function kudosityError(body, status, api) {
             ? 'The V1 connection needs BOTH the API key and its secret — it authenticates with HTTP Basic over key:secret. Both are under Settings > API in your Kudosity account. A key on its own will not work here.'
             : 'The V2 connection needs only the API key, sent as the x-api-key header. It is under Settings > API in your Kudosity account. The V1 secret is not used by V2.';
     } else if (fields.indexOf('sender') >= 0 || t.indexOf('invalid sender') >= 0) {
-        advice = 'The sender is not valid for this channel. Run the Get Sender IDs module to see what this account may send as. A virtual number that works for SMS is often not provisioned for WhatsApp or RCS — that needs enabling on the account.';
+        advice = 'The sender is not valid for this channel. Pick one from the Sender list in the module, which shows the senders registered on this account. A virtual number that works for SMS is often not provisioned for WhatsApp or RCS — that needs enabling on the account.';
     } else if (t.indexOf('sender: required') >= 0) {
-        advice = 'The V2 API requires a sender and will not fall back to an account default — unlike V1, where leaving From blank is allowed. Set Sender to one of the values returned by Get Sender IDs.';
+        advice = 'The V2 API requires a sender and will not fall back to an account default — unlike V1, where leaving From blank is allowed. Pick one from the Sender list in the module.';
     } else if (t.indexOf('content_url') >= 0) {
         advice = 'Kudosity fetches this URL itself, so it must be publicly reachable and serve an image content type. A URL that opens fine in a browser can still fail: some hosts block Kudosity\'s fetcher, and a redirect to an HTML page is rejected as the wrong content type.';
     } else if (code === 'FIELD_EMPTY' && t.indexOf('msisdn') >= 0) {

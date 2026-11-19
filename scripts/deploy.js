@@ -154,7 +154,12 @@ async function apply(client, manifest, steps, log = console.log, { noFunctions =
             if (!fns.includes(step.name)) {
                 await client.request('POST', `${app}/functions`, { json: { name: step.name } });
             }
-            await client.request('PUT', `${app}/functions/${step.name}/code`, { text: read(step.file), contentType: 'application/javascript' });
+            // Make rejects function code that does not start with the function itself ("Invalid function code"),
+            // so drop the doc comment above it; the comment stays in the repo for readers.
+            const src = read(step.file);
+            const at = src.indexOf(`function ${step.name}`);
+            if (at < 0) throw new Error(`${step.file} does not define function ${step.name}`);
+            await client.request('PUT', `${app}/functions/${step.name}/code`, { text: src.slice(at), contentType: 'application/javascript' });
             log(`function ${step.name}: ${fns.includes(step.name) ? 'updated' : 'created'}`);
         } else if (step.kind === 'icon') {
             await client.request('PUT', `${app}/icon`, { text: fs.readFileSync(path.join(ROOT, step.file)), contentType: 'image/png' });
